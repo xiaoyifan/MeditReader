@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "461722962130",
+    "firebase_url": "https://meditreader.firebaseio.com",
+    "project_id": "meditreader",
+    "storage_bucket": "meditreader.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461722962130:android:7360673b87a327c8",
+        "android_client_info": {
+          "package_name": "com.uchicago.yifan.meditreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461722962130-he7t68lgnkmneost63387tcgvom7m0fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKa2MzZak_5Nc0Uv9Vg5Y8_0jpsYOJjN8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
