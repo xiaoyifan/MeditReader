@@ -16,8 +16,11 @@ public class Post {
     public String author;
     public String title;
     public String body;
+    public String date;
+    public int commentCount = 0;
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
+    public Map<String, Boolean> bookmarks = new HashMap<>();
 
     public Post(String uid, String author, String title, String body){
         this.uid = uid;
@@ -33,8 +36,11 @@ public class Post {
         result.put("author", author);
         result.put("title", title);
         result.put("body", body);
+        result.put("date", date);
         result.put("starCount", starCount);
+        result.put("commentCount", commentCount);
         result.put("stars", stars);
+        result.put("bookmarks", bookmarks);
 
         return result;
     }
