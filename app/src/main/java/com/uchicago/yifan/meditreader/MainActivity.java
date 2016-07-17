@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
+import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
+
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
@@ -21,8 +24,8 @@ public class MainActivity extends BaseActivity {
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
 
             private final Fragment[] mFragments = new Fragment[]{
-                    new Fragment(),
-                    new Fragment(),
+                    new TrendingPostsFragment(),
+                    new MyPostsFragment(),
             };
 
             private final String[] mFragmentNames = new String[]{
