@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.R;
+import com.uchicago.yifan.meditreader.ViewHolder.PostItemViewHolder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +24,7 @@ public class PostListFragment extends Fragment {
     private static final String TAG = "PostListFragment";
 
     private DatabaseReference mDatabase;
-    private FirebaseRecyclerAdapter<Post, PostViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<Post, PostItemViewHolder> mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 

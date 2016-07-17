@@ -5,4 +5,32 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <include
+            android:id="@+id/post_header_layout"
+            layout="@layout/post_item_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" />
+
+        <include layout="@layout/post_text_layout"
+            android:id="@+id/post_item_body_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/post_header_layout"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp" />
+
+        <include layout="@layout/post_item_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post_item_body_text"/>
+
+    </RelativeLayout>
+
 </android.support.v7.widget.CardView>
