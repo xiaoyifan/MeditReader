@@ -2,16 +2,24 @@ package com.uchicago.yifan.meditreader.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.ViewHolder.PostItemViewHolder;
@@ -19,7 +27,7 @@ import com.uchicago.yifan.meditreader.ViewHolder.PostItemViewHolder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PostListFragment extends Fragment {
+public abstract class PostListFragment extends Fragment {
 
     private static final String TAG = "PostListFragment";
 
@@ -47,4 +55,149 @@ public class PostListFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        Query postsQuery = getQuery(mDatabase);
+        mAdapter = new FirebaseRecyclerAdapter<Post, PostItemViewHolder>(Post.class, R.layout.post_item, PostItemViewHolder.class, postsQuery) {
+            @Override
+            protected void populateViewHolder(PostItemViewHolder viewHolder, final Post model, final int position) {
+                final DatabaseReference postRef = getRef(position);
+
+                final String postKey = postRef.getKey();
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+//                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+//                        intent.putExtra("EXTRA_POST_KEY", postKey);
+//                        startActivity(intent);
+                    }
+                });
+
+                if (model.stars.containsKey(getUid())){
+                    viewHolder.starView.setImageResource(R.drawable.Hearts_Filled_50);
+                }
+                else {
+                    viewHolder.starView.setImageResource(R.drawable.Hearts_50);
+                }
+
+                if (model.bookmarks.containsKey(getUid())){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.Bookmark_Ribbon_Filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.Bookmark_Ribbon_50);
+                }
+
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View startView) {
+
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View bookmarkView) {
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+                        //DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(model.uid);
+
+                        // Run two transactions
+                        onBookmarkClicked(globalPostRef);
+                        onBookmarkClicked(userPostRef);
+                    }
+                });
+            }
+        };
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+
+    private void onStarClicked(DatabaseReference postRef) {
+        postRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Post p = mutableData.getValue(Post.class);
+                if (p == null) {
+                    return Transaction.success(mutableData);
+                }
+
+                if (p.stars.containsKey(getUid())) {
+                    // Unstar the post and remove self from stars
+                    p.starCount = p.starCount - 1;
+                    p.stars.remove(getUid());
+                } else {
+                    // Star the post and add self to stars
+                    p.starCount = p.starCount + 1;
+                    p.stars.put(getUid(), true);
+                }
+
+                // Set value and report transaction success
+                mutableData.setValue(p);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b,
+                                   DataSnapshot dataSnapshot) {
+                // Transaction completed
+                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+            }
+        });
+    }
+
+    private void onBookmarkClicked(DatabaseReference postRef) {
+        postRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Post p = mutableData.getValue(Post.class);
+                if (p == null) {
+                    return Transaction.success(mutableData);
+                }
+
+                if (p.bookmarks.containsKey(getUid())) {
+                    // Unstar the post and remove self from stars
+                    p.bookmarks.remove(getUid());
+                } else {
+                    // Star the post and add self to stars
+                    p.bookmarks.put(getUid(), true);
+                }
+
+                // Set value and report transaction success
+                mutableData.setValue(p);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b,
+                                   DataSnapshot dataSnapshot) {
+                // Transaction completed
+                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mAdapter != null) {
+            mAdapter.cleanup();
+        }
+    }
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    public abstract Query getQuery(DatabaseReference databaseReference);
 }
