@@ -81,17 +81,17 @@ public abstract class PostListFragment extends Fragment {
                 });
 
                 if (model.stars.containsKey(getUid())){
-                    viewHolder.starView.setImageResource(R.drawable.Hearts_Filled_50);
+                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
                 }
                 else {
-                    viewHolder.starView.setImageResource(R.drawable.Hearts_50);
+                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
                 }
 
                 if (model.bookmarks.containsKey(getUid())){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.Bookmark_Ribbon_Filled_50);
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
                 }
                 else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.Bookmark_Ribbon_50);
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
                 }
 
                 viewHolder.bindToPost(model, new View.OnClickListener() {
