@@ -39,12 +39,12 @@
                 android:src="@drawable/email_50" />
 
             <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:id="@+id/email_text"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/email_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="e-mail" />
@@ -66,13 +66,13 @@
                 android:src="@drawable/password_50" />
 
             <com.wrapp.floatlabelededittext.FloatLabeledEditText
-                android:id="@+id/password_text"
                 android:paddingLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 float:fletPadding="10dp">
 
                 <EditText
+                    android:id="@+id/password_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="password" />
@@ -82,12 +82,14 @@
 
 
         <Button
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Login"/>
 
         <Button
+            android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
