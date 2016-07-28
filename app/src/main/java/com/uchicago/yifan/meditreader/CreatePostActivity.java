@@ -1,11 +1,16 @@
 package com.uchicago.yifan.meditreader;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.github.mr5.icarus.Callback;
 import com.github.mr5.icarus.Icarus;
 import com.github.mr5.icarus.TextViewToolbar;
 import com.github.mr5.icarus.Toolbar;
@@ -17,19 +22,28 @@ import com.github.mr5.icarus.popover.FontScalePopoverImpl;
 import com.github.mr5.icarus.popover.HtmlPopoverImpl;
 import com.github.mr5.icarus.popover.ImagePopoverImpl;
 import com.github.mr5.icarus.popover.LinkPopoverImpl;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class CreatePostActivity extends AppCompatActivity {
+public class CreatePostActivity extends BaseActivity {
 
     WebView webView;
     protected Icarus icarus;
+
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_post);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         webView = (WebView) findViewById(R.id.editor);
         TextViewToolbar toolbar = new TextViewToolbar();
@@ -103,5 +117,64 @@ public class CreatePostActivity extends AppCompatActivity {
         fontScaleButton.setPopover(new FontScalePopoverImpl(fontScaleTextView, icarus));
         toolbar.addButton(fontScaleButton);
         return toolbar;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_create_post, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.action_post:
+                publishArticle();
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    private void publishArticle(){
+        icarus.getContent(new Callback() {
+            @Override
+            public void run(String params) {
+                Log.d("content", params);
+                if (params.equals("{\"content\":\"\"}")){
+                    AlertDialog alertDialog = new AlertDialog.Builder(CreatePostActivity.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("You can't publish an empty post");
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+                else{
+
+                    final String userId = getUid();
+
+                    mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                            new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            }
+                    );
+
+                }
+            }
+        });
     }
 }
