@@ -36,3 +36,16 @@
   outline: none;
   word-wrap: break-word;
 }
+
+.simditor .simditor-wrapper .simditor-placeholder {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  padding: 22px 15px;
+  font-size: 18px;
+  font-family: 'charter', Helvetica, arial, sans-serif;
+  line-height: 1.5;
+  color: #999999;
+  background: transparent;
+}
