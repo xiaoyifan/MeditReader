@@ -21,6 +21,11 @@ public class Post {
     public Map<String, Boolean> stars = new HashMap<>();
     public Map<String, Boolean> bookmarks = new HashMap<>();
 
+
+    public Post() {
+        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    }
+
     public Post(String uid, String author, String body){
         this.uid = uid;
         this.author = author;

@@ -7,18 +7,18 @@
 
     <LinearLayout
         android:id="@+id/like_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_alignParentLeft="true"
         android:layout_alignBottom="@+id/comment_bookmark_layout"
-        android:layout_alignTop="@+id/comment_bookmark_layout"
-        >
+        android:layout_alignTop="@+id/comment_bookmark_layout">
 
         <ImageView
             android:id="@+id/heart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="?attr/selectableItemBackground"
@@ -29,35 +29,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_gravity="center"
             tools:text="7" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/comment_bookmark_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/like_layout"
         android:layout_alignTop="@+id/like_layout"
-        >
+        android:gravity="end">
 
         <TextView
             android:id="@+id/post_num_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:text="7" />
+            android:layout_gravity="center"
+
+            tools:text="responses 7" />
 
         <ImageView
             android:id="@+id/bookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="?attr/selectableItemBackground"
-            android:src="@drawable/bookmark_ribbon_50" />
+            android:src="@drawable/bookmark_ribbon_50"
+            android:layout_gravity="right" />
 
     </LinearLayout>
 
