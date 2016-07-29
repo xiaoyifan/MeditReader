@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mr5.icarus.Callback;
 import com.github.mr5.icarus.Icarus;
@@ -27,11 +28,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uchicago.yifan.meditreader.Model.Post;
+import com.uchicago.yifan.meditreader.Model.User;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CreatePostActivity extends BaseActivity {
+
+    private static final String TAG = "NewPostActivity";
 
     WebView webView;
     protected Icarus icarus;
@@ -164,11 +170,24 @@ public class CreatePostActivity extends BaseActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
+                                    User user = dataSnapshot.getValue(User.class);
+
+                                    if (user == null) {
+                                        // User is null, error out
+                                        Log.e(TAG, "User " + userId + " is unexpectedly null");
+                                        Toast.makeText(CreatePostActivity.this,
+                                                "Error: could not fetch user.",
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Write new post
+                                       writeNewPost(userId, user.username);
+                                    }
+
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-
+                                    Log.w(TAG, "getUser:onCancelled", databaseError.toException());
                                 }
                             }
                     );
@@ -176,5 +195,24 @@ public class CreatePostActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+
+    public void writeNewPost(final String userId,final String username){
+        final String key = mDatabase.child("posts").push().getKey();
+        icarus.getContent(new Callback() {
+            @Override
+            public void run(String params) {
+                Post post = new Post(userId, username, params);
+                Map<String, Object> postValues = post.toMap();
+                Map<String, Object> childUpdates = new HashMap<>();
+
+                childUpdates.put("/posts/" + key, postValues);
+                childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+
+                mDatabase.updateChildren(childUpdates);
+            }
+        });
+
     }
 }

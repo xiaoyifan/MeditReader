@@ -14,7 +14,6 @@ public class Post {
 
     public String uid;
     public String author;
-    public String title;
     public String body;
     public String date;
     public int commentCount = 0;
@@ -22,10 +21,9 @@ public class Post {
     public Map<String, Boolean> stars = new HashMap<>();
     public Map<String, Boolean> bookmarks = new HashMap<>();
 
-    public Post(String uid, String author, String title, String body){
+    public Post(String uid, String author, String body){
         this.uid = uid;
         this.author = author;
-        this.title = title;
         this.body = body;
     }
 
@@ -34,7 +32,6 @@ public class Post {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
         result.put("author", author);
-        result.put("title", title);
         result.put("body", body);
         result.put("date", date);
         result.put("starCount", starCount);

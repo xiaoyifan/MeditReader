@@ -13,7 +13,6 @@ import com.uchicago.yifan.meditreader.R;
  */
 public class PostItemViewHolder extends RecyclerView.ViewHolder{
 
-    public TextView titleView;
     public TextView authorView;
     public TextView dateView;
     public ImageView starView;
@@ -25,7 +24,6 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder{
     public PostItemViewHolder(View itemView) {
         super(itemView);
 
-        titleView = (TextView) itemView.findViewById(R.id.post_title);
         dateView = (TextView)itemView.findViewById(R.id.post_date);
         authorView = (TextView) itemView.findViewById(R.id.post_author);
         starView = (ImageView) itemView.findViewById(R.id.heart);
@@ -36,7 +34,6 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener, View.OnClickListener bookmarkClickListener) {
-        titleView.setText(post.title);
         authorView.setText(post.author);
         dateView.setText(post.date);
         numStarsView.setText(String.valueOf(post.starCount));
