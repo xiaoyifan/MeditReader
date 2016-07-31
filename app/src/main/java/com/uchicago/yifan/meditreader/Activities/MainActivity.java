@@ -1,4 +1,4 @@
-package com.uchicago.yifan.meditreader;
+package com.uchicago.yifan.meditreader.Activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -22,6 +22,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.ogaclejapan.arclayout.ArcLayout;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateImagePostActivity;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateLinkPostActivity;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateQuotePostActivity;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateTextPostActivity;
+import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
 import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
 import com.uchicago.yifan.meditreader.widget.AnimatorUtils;
@@ -276,16 +281,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
          switch ((String)v.getTag())
          {
              case "photoTag":
-                 startActivity(new Intent(this, CreatePostActivity.class));
+                 startActivity(new Intent(this, CreateImagePostActivity.class));
                  break;
              case "quoteTag":
-                 startActivity(new Intent(this, CreatePostActivity.class));
+                 startActivity(new Intent(this, CreateQuotePostActivity.class));
                  break;
              case "linkTag":
-                 startActivity(new Intent(this, CreatePostActivity.class));
+                 startActivity(new Intent(this, CreateLinkPostActivity.class));
                  break;
              case "textTag":
-                 startActivity(new Intent(this, CreatePostActivity.class));
+                 startActivity(new Intent(this, CreateTextPostActivity.class));
                  break;
              default:
                  break;

@@ -1,4 +1,4 @@
-package com.uchicago.yifan.meditreader;
+package com.uchicago.yifan.meditreader.Activities;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
