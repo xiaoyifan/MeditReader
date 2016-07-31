@@ -4,16 +4,21 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.ogaclejapan.arclayout.ArcLayout;
@@ -25,7 +30,7 @@ import com.uchicago.yifan.meditreader.widget.ClipRevealFrame;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
 
@@ -49,6 +54,11 @@ public class MainActivity extends BaseActivity {
         menuLayout = (ClipRevealFrame) findViewById(R.id.menu_layout);
         arcLayout = (ArcLayout) findViewById(R.id.arc_layout);
         centerItem = findViewById(R.id.center_item);
+
+        centerItem.setOnClickListener(this);
+        for (int i = 0, size = arcLayout.getChildCount(); i < size; i++) {
+            arcLayout.getChildAt(i).setOnClickListener(this);
+        }
 
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
 
@@ -97,8 +107,36 @@ public class MainActivity extends BaseActivity {
                     showMenu(x, y, radiusOfFab, radiusFromFabToRoot);
                 }
                 v.setSelected(!v.isSelected());
+
+                FloatingActionButton floatingActionButton = (FloatingActionButton)v;
+
+                if (v.isSelected()){
+                    v.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.tumblr_primary)));
+                    floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.cancel_white));
+                }
+                else{
+                    v.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.colorAccent)));
+                    floatingActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_image_edit));
+                }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FloatingActionButton vv = (FloatingActionButton) findViewById(R.id.fab_new_post);
+        vv.setSelected(false);
+
+        if (vv.isSelected()){
+            vv.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.tumblr_primary)));
+            vv.setImageDrawable(getResources().getDrawable(R.drawable.cancel_white));
+        }
+        else{
+            vv.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getBaseContext(), R.color.colorAccent)));
+            vv.setImageDrawable(getResources().getDrawable(R.drawable.ic_image_edit));
+        }
+        menuLayout.setVisibility(View.INVISIBLE);
     }
 
     private void showMenu(int cx, int cy, float startRadius, float endRadius) {
@@ -230,4 +268,30 @@ public class MainActivity extends BaseActivity {
         }
         return reveal;
     }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v instanceof ImageButton) {
+         switch ((String)v.getTag())
+         {
+             case "photoTag":
+                 startActivity(new Intent(this, CreatePostActivity.class));
+                 break;
+             case "quoteTag":
+                 startActivity(new Intent(this, CreatePostActivity.class));
+                 break;
+             case "linkTag":
+                 startActivity(new Intent(this, CreatePostActivity.class));
+                 break;
+             case "textTag":
+                 startActivity(new Intent(this, CreatePostActivity.class));
+                 break;
+             default:
+                 break;
+         }
+        }
+
+    }
+
 }

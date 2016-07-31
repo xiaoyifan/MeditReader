@@ -39,18 +39,21 @@
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_green_oval"
                 android:src="@drawable/link"
+                android:tag="@string/linkTag"
                 />
 
             <ImageButton
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_white_oval"
                 android:src="@drawable/letter"
+                android:tag="@string/textTag"
                 />
 
             <ImageButton
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_blue_oval"
                 android:src="@drawable/quote"
+                android:tag="@string/quoteTag"
                 />
 
         </com.ogaclejapan.arclayout.ArcLayout>
@@ -58,6 +61,7 @@
         <ImageButton
             android:id="@+id/center_item"
             style="@style/Item.Tumblr"
+            android:tag="@string/photoTag"
             android:layout_gravity="center"
             android:background="@drawable/tumblr_red_oval"
             android:src="@drawable/camera"
