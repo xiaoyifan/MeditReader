@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.ogaclejapan.arclayout.ArcLayout;
 import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
 import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
+import com.uchicago.yifan.meditreader.widget.AnimatorUtils;
 import com.uchicago.yifan.meditreader.widget.ClipRevealFrame;
 
 import java.util.ArrayList;

@@ -35,44 +35,32 @@
             app:arc_radius="@dimen/layout_radius_tumblr"
             >
 
-            <Button
-                style="@style/Item.Tumblr"
-                android:background="@drawable/tumblr_orange_oval"
-                android:text="A"
-                />
-
-            <Button
+            <ImageButton
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_green_oval"
-                android:text="B"
+                android:src="@drawable/link"
                 />
 
-            <Button
+            <ImageButton
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_white_oval"
-                android:text="C"
+                android:src="@drawable/letter"
                 />
 
-            <Button
-                style="@style/Item.Tumblr"
-                android:background="@drawable/tumblr_grey_oval"
-                android:text="D"
-                />
-
-            <Button
+            <ImageButton
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_blue_oval"
-                android:text="E"
+                android:src="@drawable/quote"
                 />
 
         </com.ogaclejapan.arclayout.ArcLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/center_item"
             style="@style/Item.Tumblr"
             android:layout_gravity="center"
             android:background="@drawable/tumblr_red_oval"
-            android:text="F"
+            android:src="@drawable/camera"
             />
 
     </com.uchicago.yifan.meditreader.widget.ClipRevealFrame>

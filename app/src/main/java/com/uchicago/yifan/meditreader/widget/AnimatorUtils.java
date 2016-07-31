@@ -1,4 +1,4 @@
-package com.uchicago.yifan.meditreader;
+package com.uchicago.yifan.meditreader.widget;
 
 import android.animation.PropertyValuesHolder;
 
