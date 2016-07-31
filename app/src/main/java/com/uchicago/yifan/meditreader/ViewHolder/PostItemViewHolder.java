@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uchicago.yifan.meditreader.Model.Post;
-import com.uchicago.yifan.meditreader.R;
+import com.uchicago.yifan.meditreader.*;
 
 /**
  * Created by Yifan on 7/17/16.
