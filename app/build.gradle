@@ -37,6 +37,7 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.ogaclejapan.arclayout:library:1.1.0@aar'
     compile 'com.github.ParkSangGwon:TedPicker:v1.0.10'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

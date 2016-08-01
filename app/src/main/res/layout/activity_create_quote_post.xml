@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    tools:ignore="MissingPrefix"
     tools:context=".Activities.CreatePost.CreateQuotePostActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,6 +21,7 @@
         android:id="@+id/quote_text"
         android:layout_width="match_parent"
         android:hint="Quote Text"
+        fontPath="charter_italic.ttf"
         android:minHeight="150dp"
         android:gravity="top"
         android:background="@android:color/transparent"
@@ -31,6 +33,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/quote_source"
         android:hint="Quote Source"
+        fontPath="charter_regular.ttf"
         android:minHeight="100dp"
         android:gravity="top"
         android:background="@android:color/transparent"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,61 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:fillViewport="true"
+    tools:ignore="MissingPrefix"
     tools:context=".Activities.CreatePost.CreateLinkPostActivity">
 
-</RelativeLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/link_title"
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/edittext_vertical_margin"
+            android:hint="Your title"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:gravity="top"
+            android:background="@android:color/transparent"
+            fontPath="charter_bold.ttf"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+
+        <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/link_url"
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/edittext_vertical_margin"
+            android:hint="Type in or paste URL"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:gravity="top"
+            fontPath="charter_regular.ttf"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+        <EditText xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:paddingTop="@dimen/edittext_vertical_margin"
+            android:id="@+id/link_description"
+            android:hint="Some comment"
+            android:minHeight="100dp"
+            android:gravity="top"
+            fontPath="charter_regular.ttf"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+    </LinearLayout>
+
+</ScrollView>
