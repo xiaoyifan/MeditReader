@@ -1,11 +1,14 @@
 package com.uchicago.yifan.meditreader.Activities.CreatePost;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.firebase.storage.StorageReference;
+import com.uchicago.yifan.meditreader.Activities.BaseActivity;
 import com.uchicago.yifan.meditreader.R;
 
-public class CreateImagePostActivity extends AppCompatActivity {
+public class CreateImagePostActivity extends BaseActivity {
+
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
