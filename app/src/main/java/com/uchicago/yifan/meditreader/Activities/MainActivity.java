@@ -4,8 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,8 +23,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.gun0912.tedpicker.ImagePickerActivity;
 import com.ogaclejapan.arclayout.ArcLayout;
-import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateImagePostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateLinkPostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateQuotePostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateTextPostActivity;
@@ -34,6 +36,7 @@ import com.uchicago.yifan.meditreader.widget.ClipRevealFrame;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -49,6 +52,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     ArcLayout arcLayout;
     View centerItem;
 
+    private static final int INTENT_REQUEST_GET_IMAGES = 13;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -281,7 +285,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
          switch ((String)v.getTag())
          {
              case "photoTag":
-                 startActivity(new Intent(this, CreateImagePostActivity.class));
+                getImages();
                  break;
              case "quoteTag":
                  startActivity(new Intent(this, CreateQuotePostActivity.class));
@@ -297,6 +301,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
          }
         }
 
+    }
+
+    private void getImages() {
+
+        Intent intent  = new Intent(this, ImagePickerActivity.class);
+        startActivityForResult(intent,INTENT_REQUEST_GET_IMAGES);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resuleCode, Intent intent) {
+        super.onActivityResult(requestCode, resuleCode, intent);
+
+        if (requestCode == INTENT_REQUEST_GET_IMAGES && resuleCode == Activity.RESULT_OK ) {
+
+            ArrayList<Uri>  image_uris = intent.getParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS);
+
+            //do something
+        }
     }
 
 }

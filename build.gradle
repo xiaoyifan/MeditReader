@@ -15,17 +15,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-
-// for downloading polypicker dependency cwac-camera
-        maven {
-            url "https://repo.commonsware.com.s3.amazonaws.com"
-        }
-
-        // for downloading poly-picker now we are using jitpack.
-        // Goodbye Maven Central
-        maven {
-            url "https://jitpack.io"
-        }
+        maven { url "https://repo.commonsware.com.s3.amazonaws.com" }
+        maven { url "https://jitpack.io" }
     }
 }
 
