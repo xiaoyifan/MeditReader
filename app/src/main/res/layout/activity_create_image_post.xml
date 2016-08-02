@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,4 +10,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activities.CreatePost.CreateImagePostActivity">
 
-</RelativeLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/media_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="new post image"
+        android:visibility="visible" />
+
+    <EditText
+        android:paddingTop="@dimen/edittext_vertical_margin"
+        android:paddingBottom="@dimen/edittext_vertical_margin"
+        android:id="@+id/image_description"
+        android:hint="Some comment about the image"
+        android:minHeight="100dp"
+        android:gravity="top"
+        fontPath="charter_regular.ttf"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </EditText>
+
+    </LinearLayout>
+
+</ScrollView>

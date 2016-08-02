@@ -23,8 +23,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.gun0912.tedpicker.Config;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.ogaclejapan.arclayout.ArcLayout;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateImagePostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateLinkPostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateQuotePostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateTextPostActivity;
@@ -304,7 +306,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void getImages() {
-
+        Config config = new Config();
+        config.setSelectionMin(1);
+        config.setSelectionLimit(1);
+        ImagePickerActivity.setConfig(config);
         Intent intent  = new Intent(this, ImagePickerActivity.class);
         startActivityForResult(intent,INTENT_REQUEST_GET_IMAGES);
 
@@ -318,7 +323,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
             ArrayList<Uri>  image_uris = intent.getParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS);
 
-            //do something
+            Intent imageIntent = new Intent(this, CreateImagePostActivity.class);
+            imageIntent.putParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS, image_uris);
+            startActivity(imageIntent);
         }
     }
 

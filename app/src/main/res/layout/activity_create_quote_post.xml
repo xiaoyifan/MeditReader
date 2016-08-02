@@ -19,6 +19,7 @@
     <EditText xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/quote_text"
+        android:paddingTop="@dimen/edittext_vertical_margin"
         android:layout_width="match_parent"
         android:hint="Quote Text"
         fontPath="charter_italic.ttf"
