@@ -3,6 +3,8 @@ package com.uchicago.yifan.meditreader.Model;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +16,11 @@ public class Post {
 
     public String uid;
     public String author;
-    public String body;
+    public String title;
+    public String urlString;
     public String date;
+    public String description;
+    public POST_TYPE post_type;
     public int commentCount = 0;
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
@@ -26,10 +31,33 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(String uid, String author, String body){
+    public Post(String uid, POST_TYPE type, String title, String author, String description){
         this.uid = uid;
         this.author = author;
-        this.body = body;
+        this.post_type = type;
+        this.title = title;
+        this.description = description;
+
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        this.date = df.format(c.getTime());
+    }
+
+    public Post(String uid, POST_TYPE type, String title, String urlString, String author, String description){
+        this.uid = uid;
+        this.author = author;
+        this.post_type = type;
+        this.title = title;
+        this.urlString = urlString;
+        this.description = description;
+
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        this.date = df.format(c.getTime());
     }
 
     @Exclude
@@ -37,8 +65,11 @@ public class Post {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
         result.put("author", author);
-        result.put("body", body);
+        result.put("post_type", post_type);
+        result.put("title", title);
+        result.put("description", description);
         result.put("date", date);
+        result.put("url", urlString);
         result.put("starCount", starCount);
         result.put("commentCount", commentCount);
         result.put("stars", stars);
@@ -47,4 +78,8 @@ public class Post {
         return result;
     }
 
+}
+
+enum POST_TYPE {
+    TEXT, QUOTE, LINK, IMAGE;
 }
