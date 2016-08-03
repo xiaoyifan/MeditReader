@@ -8,4 +8,9 @@ public class CreateLinkPostActivity extends CreatePostActivity {
     protected int getLayoutResourceId() {
         return R.layout.activity_create_link_post;
     }
+
+    @Override
+    void publishArticle() {
+
+    }
 }

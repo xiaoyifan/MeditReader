@@ -8,4 +8,9 @@ public class CreateQuotePostActivity extends CreatePostActivity {
     protected int getLayoutResourceId() {
         return R.layout.activity_create_quote_post;
     }
+
+    @Override
+    void publishArticle() {
+
+    }
 }

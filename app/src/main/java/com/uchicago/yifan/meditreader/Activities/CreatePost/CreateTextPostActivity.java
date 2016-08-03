@@ -9,4 +9,9 @@ public class CreateTextPostActivity extends CreatePostActivity {
     protected int getLayoutResourceId() {
         return R.layout.activity_create_text_post;
     }
+
+    @Override
+    void publishArticle() {
+
+    }
 }

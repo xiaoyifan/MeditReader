@@ -20,7 +20,7 @@ public abstract class CreatePostActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        this.mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -45,7 +45,5 @@ public abstract class CreatePostActivity extends BaseActivity {
         return true;
     }
 
-    private void publishArticle(){
-
-    }
+    abstract void publishArticle();
 }
