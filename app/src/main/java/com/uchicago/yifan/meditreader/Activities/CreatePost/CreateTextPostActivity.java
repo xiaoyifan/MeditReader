@@ -11,7 +11,7 @@ public class CreateTextPostActivity extends CreatePostActivity {
     }
 
     @Override
-    void publishArticle() {
-
+    void writeNewPost() {
+        
     }
 }

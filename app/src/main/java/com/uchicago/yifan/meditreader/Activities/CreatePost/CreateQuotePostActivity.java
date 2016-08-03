@@ -10,7 +10,7 @@ public class CreateQuotePostActivity extends CreatePostActivity {
     }
 
     @Override
-    void publishArticle() {
+    void writeNewPost() {
 
     }
 }

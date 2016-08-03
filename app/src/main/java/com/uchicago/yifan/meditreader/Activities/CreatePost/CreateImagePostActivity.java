@@ -35,7 +35,7 @@ public class CreateImagePostActivity extends CreatePostActivity {
     }
 
     @Override
-    void publishArticle() {
+    void writeNewPost() {
 
     }
 }

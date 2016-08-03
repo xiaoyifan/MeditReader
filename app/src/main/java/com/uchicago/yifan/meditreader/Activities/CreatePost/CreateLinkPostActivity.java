@@ -10,7 +10,7 @@ public class CreateLinkPostActivity extends CreatePostActivity {
     }
 
     @Override
-    void publishArticle() {
+    void writeNewPost() {
 
     }
 }

@@ -1,12 +1,18 @@
 package com.uchicago.yifan.meditreader.Activities.CreatePost;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Activities.BaseActivity;
+import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 
 public abstract class CreatePostActivity extends BaseActivity {
@@ -45,5 +51,34 @@ public abstract class CreatePostActivity extends BaseActivity {
         return true;
     }
 
-    abstract void publishArticle();
+    void publishArticle(){
+        final String userId = getUid();
+        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+
+                        if (user == null){
+                            Log.e(TAG, "User " + userId + " is unexpectedly null");
+                            Toast.makeText(CreatePostActivity.this,
+                                    "Error: could not fetch user.",
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+
+                            writeNewPost();
+                        }
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    }
+                }
+        );
+    }
+
+    abstract void writeNewPost();
 }
