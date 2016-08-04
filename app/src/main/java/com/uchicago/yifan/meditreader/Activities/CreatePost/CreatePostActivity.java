@@ -19,14 +19,14 @@ public abstract class CreatePostActivity extends BaseActivity {
 
     private static final String TAG = "NewPostActivity";
 
-    private DatabaseReference mDatabase;
+    public DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
 
-        this.mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -66,7 +66,7 @@ public abstract class CreatePostActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         }else{
 
-                            writeNewPost();
+                            writeNewPost(getUid(), user.username);
                         }
 
                         finish();
@@ -80,5 +80,5 @@ public abstract class CreatePostActivity extends BaseActivity {
         );
     }
 
-    abstract void writeNewPost();
+    abstract void writeNewPost(String userId, String username);
 }

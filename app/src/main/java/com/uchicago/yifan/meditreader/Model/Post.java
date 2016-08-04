@@ -20,7 +20,7 @@ public class Post {
     public String urlString;
     public String date;
     public String description;
-    public POST_TYPE post_type;
+    public PostType post_type;
     public int commentCount = 0;
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
@@ -31,7 +31,7 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(String uid, POST_TYPE type, String title, String author, String description){
+    public Post(String uid, PostType type, String title, String author, String description){
         this.uid = uid;
         this.author = author;
         this.post_type = type;
@@ -45,7 +45,7 @@ public class Post {
         this.date = df.format(c.getTime());
     }
 
-    public Post(String uid, POST_TYPE type, String title, String urlString, String author, String description){
+    public Post(String uid, PostType type, String title, String urlString, String author, String description){
         this.uid = uid;
         this.author = author;
         this.post_type = type;
@@ -65,7 +65,7 @@ public class Post {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
         result.put("author", author);
-        result.put("post_type", post_type);
+        result.put("post_type", post_type.toString());
         result.put("title", title);
         result.put("description", description);
         result.put("date", date);
@@ -78,8 +78,4 @@ public class Post {
         return result;
     }
 
-}
-
-enum POST_TYPE {
-    TEXT, QUOTE, LINK, IMAGE;
 }
