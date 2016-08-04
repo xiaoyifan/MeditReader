@@ -2,17 +2,16 @@ package com.uchicago.yifan.meditreader.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uchicago.yifan.meditreader.Model.Post;
-import com.uchicago.yifan.meditreader.*;
+import com.uchicago.yifan.meditreader.R;
 
 /**
- * Created by Yifan on 7/17/16.
+ * Created by Yifan on 8/3/16.
  */
-public class PostItemViewHolder extends RecyclerView.ViewHolder{
+public class PostQuoteViewHolder extends RecyclerView.ViewHolder{
 
     public TextView authorView;
     public TextView dateView;
@@ -20,9 +19,10 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder{
     public TextView numStarsView;
     public ImageView bookmarkView;
     public TextView numCommentView;
-    public WebView bodyView;
+    public TextView titleView;
+    public TextView bodyView;
 
-    public PostItemViewHolder(View itemView) {
+    public PostQuoteViewHolder(View itemView) {
         super(itemView);
 
         dateView = (TextView)itemView.findViewById(R.id.post_date);
@@ -31,7 +31,8 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder{
         numStarsView = (TextView) itemView.findViewById(R.id.post_num_stars);
         bookmarkView = (ImageView)itemView.findViewById(R.id.bookmark);
         numCommentView = (TextView)itemView.findViewById(R.id.post_num_comment);
-        bodyView = (WebView) itemView.findViewById(R.id.post_body);
+        titleView = (TextView)itemView.findViewById(R.id.quote_text_view);
+        bodyView = (TextView) itemView.findViewById(R.id.quote_source_view);
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener, View.OnClickListener bookmarkClickListener) {
@@ -39,8 +40,8 @@ public class PostItemViewHolder extends RecyclerView.ViewHolder{
         dateView.setText(post.date);
         numStarsView.setText(String.valueOf(post.starCount));
         numCommentView.setText("responses " + String.valueOf(post.commentCount));
-        //bodyView.setText(post.body);
-
+        titleView.setText(post.title);
+        bodyView.setText(post.description);
         starView.setOnClickListener(starClickListener);
         bookmarkView.setOnClickListener(bookmarkClickListener);
     }

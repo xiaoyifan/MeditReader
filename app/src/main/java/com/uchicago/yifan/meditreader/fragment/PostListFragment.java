@@ -22,7 +22,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.R;
-import com.uchicago.yifan.meditreader.ViewHolder.PostItemViewHolder;
+import com.uchicago.yifan.meditreader.ViewHolder.PostTextViewHolder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +32,7 @@ public abstract class PostListFragment extends Fragment {
     private static final String TAG = "PostListFragment";
 
     private DatabaseReference mDatabase;
-    private FirebaseRecyclerAdapter<Post, PostItemViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<Post, PostTextViewHolder> mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
@@ -65,9 +65,15 @@ public abstract class PostListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Query postsQuery = getQuery(mDatabase);
-        mAdapter = new FirebaseRecyclerAdapter<Post, PostItemViewHolder>(Post.class, R.layout.post_item, PostItemViewHolder.class, postsQuery) {
+        mAdapter = new FirebaseRecyclerAdapter<Post, PostTextViewHolder>(Post.class, R.layout.post_item_text, PostTextViewHolder.class, postsQuery) {
+
             @Override
-            protected void populateViewHolder(PostItemViewHolder viewHolder, final Post model, final int position) {
+            public int getItemViewType(int position) {
+                return super.getItemViewType(position);
+            }
+
+            @Override
+            protected void populateViewHolder(PostTextViewHolder viewHolder, final Post model, final int position) {
                 final DatabaseReference postRef = getRef(position);
 
                 final String postKey = postRef.getKey();

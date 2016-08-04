@@ -12,6 +12,6 @@
         android:clipToPadding="false"
         android:padding="5dp"
         android:scrollbars="vertical"
-        tools:listitem="@layout/post_item" />
+        tools:listitem="@layout/post_item_text" />
 
 </FrameLayout>

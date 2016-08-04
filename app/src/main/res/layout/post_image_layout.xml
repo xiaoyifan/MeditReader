@@ -6,16 +6,16 @@
     tools:ignore="MissingPrefix"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_title"
+    <ImageView
+        android:id="@+id/image_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        fontPath="charter_bold.ttf"
         android:layout_marginTop="5dp"/>
+
     <TextView
-        android:id="@+id/text_body"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:id="@+id/image_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         fontPath="charter_regular.ttf"
         tools:text="" />
