@@ -22,6 +22,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.R;
+import com.uchicago.yifan.meditreader.ViewHolder.PostImageViewHolder;
+import com.uchicago.yifan.meditreader.ViewHolder.PostLinkViewHolder;
+import com.uchicago.yifan.meditreader.ViewHolder.PostQuoteViewHolder;
 import com.uchicago.yifan.meditreader.ViewHolder.PostTextViewHolder;
 
 /**
@@ -31,8 +34,13 @@ public abstract class PostListFragment extends Fragment {
 
     private static final String TAG = "PostListFragment";
 
+    private static final int IMAGE = 0;
+    private static final int LINK = 1;
+    private static final int TEXT = 2;
+    private static final int QUOTE = 3;
+
     private DatabaseReference mDatabase;
-    private FirebaseRecyclerAdapter<Post, PostTextViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<Post, RecyclerView.ViewHolder> mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
@@ -65,70 +73,89 @@ public abstract class PostListFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Query postsQuery = getQuery(mDatabase);
-        mAdapter = new FirebaseRecyclerAdapter<Post, PostTextViewHolder>(Post.class, R.layout.post_item_text, PostTextViewHolder.class, postsQuery) {
+        mAdapter = new FirebaseRecyclerAdapter<Post, RecyclerView.ViewHolder>(Post.class, R.layout.post_item_image, RecyclerView.ViewHolder.class, postsQuery)
+        {
 
             @Override
             public int getItemViewType(int position) {
+
+                Post post = getItem(position);
+
+                switch (post.post_type.toString()){
+                    case "IMAGE":
+                        return IMAGE;
+                    case "LINK":
+                        return LINK;
+                    case "TEXT":
+                        return TEXT;
+                    case "QUOTE":
+                        return QUOTE;
+                }
+
                 return super.getItemViewType(position);
             }
 
             @Override
-            protected void populateViewHolder(PostTextViewHolder viewHolder, final Post model, final int position) {
-                final DatabaseReference postRef = getRef(position);
+            protected void populateViewHolder(RecyclerView.ViewHolder viewHolder, final Post model, final int position) {
 
-                final String postKey = postRef.getKey();
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-//                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-//                        intent.putExtra("EXTRA_POST_KEY", postKey);
-//                        startActivity(intent);
-                    }
-                });
-
-                if (model.stars.containsKey(getUid())){
-                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                switch (model.post_type.toString()){
+                    case "IMAGE":
+                        populateImageViewHolder((PostImageViewHolder)viewHolder, model, position);
+                        break;
+                    case "LINK":
+                        populateLinkViewHolder((PostLinkViewHolder)viewHolder, model, position);
+                        break;
+                    case "TEXT":
+                        populateTextViewHolder((PostTextViewHolder)viewHolder, model, position);
+                        break;
+                    case "QUOTE":
+                        populateQuoteViewHolder((PostQuoteViewHolder)viewHolder, model, position);
+                        break;
                 }
-                else {
-                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
-                }
-
-                if (model.bookmarks.containsKey(getUid())){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
-                }
-                else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
-                }
-
-                viewHolder.bindToPost(model, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View startView) {
-
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-
-                        // Run two transactions
-                        onStarClicked(globalPostRef);
-                        onStarClicked(userPostRef);
-
-                    }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View bookmarkView) {
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-                        //DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(model.uid);
-
-                        // Run two transactions
-                        onBookmarkClicked(globalPostRef);
-                        onBookmarkClicked(userPostRef);
-                    }
-                });
             }
+
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+                switch (viewType){
+                    case IMAGE:
+                        View postType1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_image, parent, false);
+                        return new PostImageViewHolder(postType1);
+                    case LINK:
+                        View postType2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_link, parent, false);
+                        return new PostLinkViewHolder(postType2);
+                    case TEXT:
+                        View postType3 = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_text, parent, false);
+                        return new PostTextViewHolder(postType3);
+                    case QUOTE:
+                        View postType4 = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_quote, parent, false);
+                        return new PostQuoteViewHolder(postType4);
+                }
+
+                return super.onCreateViewHolder(parent, viewType);
+            }
+
         };
+
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    public void populateImageViewHolder(PostImageViewHolder viewHolder, Post model, final int position){
+
+    }
+
+    public void populateLinkViewHolder(PostLinkViewHolder viewHolder, Post model, final int position){
+
+    }
+
+    public void populateTextViewHolder(PostTextViewHolder viewHolder, Post model, final int position){
+
+    }
+
+    public void populateQuoteViewHolder(PostQuoteViewHolder viewHolder, Post model, final int position){
+
+    }
 
     private void onStarClicked(DatabaseReference postRef) {
         postRef.runTransaction(new Transaction.Handler() {
