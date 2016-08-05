@@ -20,7 +20,7 @@ public class Post {
     public String urlString;
     public String date;
     public String description;
-    public PostType post_type;
+    public String post_type;
     public int commentCount = 0;
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
@@ -31,7 +31,7 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(String uid, PostType type, String title, String author, String description){
+    public Post(String uid, String type, String title, String author, String description){
         this.uid = uid;
         this.author = author;
         this.post_type = type;
@@ -45,7 +45,7 @@ public class Post {
         this.date = df.format(c.getTime());
     }
 
-    public Post(String uid, PostType type, String title, String urlString, String author, String description){
+    public Post(String uid, String type, String title, String urlString, String author, String description){
         this.uid = uid;
         this.author = author;
         this.post_type = type;

@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.storage.StorageReference;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.uchicago.yifan.meditreader.Model.Post;
-import com.uchicago.yifan.meditreader.Model.PostType;
 import com.uchicago.yifan.meditreader.R;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class CreateImagePostActivity extends CreatePostActivity {
 
         String key = mDatabase.child("posts").push().getKey();
         EditText ImageDescription = (EditText) findViewById(R.id.image_description);
-        Post post = new Post(userId, PostType.IMAGE, null, imageUrl, username, ImageDescription.getText().toString());
+        Post post = new Post(userId, "IMAGE", null, imageUrl, username, ImageDescription.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 

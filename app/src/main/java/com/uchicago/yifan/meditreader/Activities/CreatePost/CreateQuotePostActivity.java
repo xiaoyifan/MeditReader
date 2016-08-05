@@ -3,7 +3,6 @@ package com.uchicago.yifan.meditreader.Activities.CreatePost;
 import android.widget.EditText;
 
 import com.uchicago.yifan.meditreader.Model.Post;
-import com.uchicago.yifan.meditreader.Model.PostType;
 import com.uchicago.yifan.meditreader.R;
 
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class CreateQuotePostActivity extends CreatePostActivity {
         String key = mDatabase.child("posts").push().getKey();
         EditText QuoteText = (EditText) findViewById(R.id.quote_text);
         EditText QuoteSource = (EditText) findViewById(R.id.quote_source);
-        Post post = new Post(userId, PostType.IMAGE, QuoteText.getText().toString(), username, QuoteSource.getText().toString());
+        Post post = new Post(userId, "QUOTE", QuoteText.getText().toString(), username, QuoteSource.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 

@@ -135,26 +135,192 @@ public abstract class PostListFragment extends Fragment {
                 return super.onCreateViewHolder(parent, viewType);
             }
 
+
+            public void populateImageViewHolder(PostImageViewHolder viewHolder, final Post model, final int position){
+
+                final DatabaseReference postRef = getRef(position);
+                final String postKey = postRef.getKey();
+
+                if (model.stars.containsKey(getUid())){
+                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                }
+                else {
+                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
+                }
+
+                if (model.bookmarks.containsKey(getUid())){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                }
+
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View startView) {
+
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View bookmarkView) {
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+                        //DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(model.uid);
+
+                        // Run two transactions
+                        onBookmarkClicked(globalPostRef);
+                        onBookmarkClicked(userPostRef);
+                    }
+                });
+            }
+
+            public void populateLinkViewHolder(PostLinkViewHolder viewHolder, final Post model, final int position){
+
+                final DatabaseReference postRef = getRef(position);
+                final String postKey = postRef.getKey();
+
+                if (model.stars.containsKey(getUid())){
+                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                }
+                else {
+                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
+                }
+
+                if (model.bookmarks.containsKey(getUid())){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                }
+
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View startView) {
+
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View bookmarkView) {
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+                        //DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(model.uid);
+
+                        // Run two transactions
+                        onBookmarkClicked(globalPostRef);
+                        onBookmarkClicked(userPostRef);
+                    }
+                });
+            }
+
+            public void populateTextViewHolder(PostTextViewHolder viewHolder, final Post model, final int position){
+
+                final DatabaseReference postRef = getRef(position);
+                final String postKey = postRef.getKey();
+
+                if (model.stars.containsKey(getUid())){
+                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                }
+                else {
+                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
+                }
+
+                if (model.bookmarks.containsKey(getUid())){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                }
+
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View startView) {
+
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View bookmarkView) {
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+                        //DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(model.uid);
+
+                        // Run two transactions
+                        onBookmarkClicked(globalPostRef);
+                        onBookmarkClicked(userPostRef);
+                    }
+                });
+            }
+
+            public void populateQuoteViewHolder(PostQuoteViewHolder viewHolder, final Post model, final int position){
+
+                final DatabaseReference postRef = getRef(position);
+                final String postKey = postRef.getKey();
+
+                if (model.stars.containsKey(getUid())){
+                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                }
+                else {
+                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
+                }
+
+                if (model.bookmarks.containsKey(getUid())){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                }
+
+                viewHolder.bindToPost(model, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View startView) {
+
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+
+                        // Run two transactions
+                        onStarClicked(globalPostRef);
+                        onStarClicked(userPostRef);
+
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View bookmarkView) {
+                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
+                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
+                        //DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(model.uid);
+
+                        // Run two transactions
+                        onBookmarkClicked(globalPostRef);
+                        onBookmarkClicked(userPostRef);
+                    }
+                });
+            }
+
+
         };
 
 
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    public void populateImageViewHolder(PostImageViewHolder viewHolder, Post model, final int position){
-
-    }
-
-    public void populateLinkViewHolder(PostLinkViewHolder viewHolder, Post model, final int position){
-
-    }
-
-    public void populateTextViewHolder(PostTextViewHolder viewHolder, Post model, final int position){
-
-    }
-
-    public void populateQuoteViewHolder(PostQuoteViewHolder viewHolder, Post model, final int position){
-
     }
 
     private void onStarClicked(DatabaseReference postRef) {
