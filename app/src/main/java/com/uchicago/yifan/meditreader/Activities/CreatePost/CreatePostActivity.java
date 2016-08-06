@@ -68,8 +68,6 @@ public abstract class CreatePostActivity extends BaseActivity {
 
                             writeNewPost(getUid(), user.username);
                         }
-
-                        finish();
                     }
 
                     @Override

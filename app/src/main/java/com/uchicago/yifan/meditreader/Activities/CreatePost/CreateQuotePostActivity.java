@@ -30,5 +30,7 @@ public class CreateQuotePostActivity extends CreatePostActivity {
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
+
+        finish();
     }
 }
