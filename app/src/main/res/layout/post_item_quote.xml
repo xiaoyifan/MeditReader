@@ -28,6 +28,7 @@
             android:layout_marginTop="10dp" />
 
         <include layout="@layout/post_item_bottom"
+            android:layout_below="@+id/post_item_body_quote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

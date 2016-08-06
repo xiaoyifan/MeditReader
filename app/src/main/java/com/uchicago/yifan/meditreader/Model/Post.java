@@ -17,7 +17,7 @@ public class Post {
     public String uid;
     public String author;
     public String title;
-    public String urlString;
+    public String url;
     public String date;
     public String description;
     public String post_type;
@@ -50,7 +50,7 @@ public class Post {
         this.author = author;
         this.post_type = type;
         this.title = title;
-        this.urlString = urlString;
+        this.url = url;
         this.description = description;
 
         Calendar c = Calendar.getInstance();
@@ -69,7 +69,7 @@ public class Post {
         result.put("title", title);
         result.put("description", description);
         result.put("date", date);
-        result.put("url", urlString);
+        result.put("url", url);
         result.put("starCount", starCount);
         result.put("commentCount", commentCount);
         result.put("stars", stars);

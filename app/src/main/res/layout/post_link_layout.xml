@@ -18,15 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        fontPath="charter_regular.ttf"
-        tools:text="" />
+        fontPath="charter_regular.ttf" />
 
     <TextView
         android:id="@+id/link_description_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        fontPath="charter_regular.ttf"
-        tools:text="" />
+        fontPath="charter_regular.ttf" />
 
 </LinearLayout>

@@ -32,7 +32,7 @@ public class PostTextViewHolder extends RecyclerView.ViewHolder{
         bookmarkView = (ImageView)itemView.findViewById(R.id.bookmark);
         numCommentView = (TextView)itemView.findViewById(R.id.post_num_comment);
         titleView = (TextView)itemView.findViewById(R.id.text_title);
-        bodyView = (TextView) itemView.findViewById(R.id.text_content);
+        bodyView = (TextView) itemView.findViewById(R.id.text_body);
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener, View.OnClickListener bookmarkClickListener) {

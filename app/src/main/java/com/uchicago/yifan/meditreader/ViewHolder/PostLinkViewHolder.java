@@ -43,7 +43,7 @@ public class PostLinkViewHolder extends RecyclerView.ViewHolder{
         numStarsView.setText(String.valueOf(post.starCount));
         numCommentView.setText("responses " + String.valueOf(post.commentCount));
         linkTitleView.setText(post.title);
-        linkView.setText(post.urlString);
+        linkView.setText(post.url);
         linkDescriptionView.setText(post.description);
         starView.setOnClickListener(starClickListener);
         bookmarkView.setOnClickListener(bookmarkClickListener);
