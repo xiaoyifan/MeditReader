@@ -18,6 +18,7 @@ import com.gun0912.tedpicker.ImagePickerActivity;
 import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class CreateImagePostActivity extends CreatePostActivity {
                 .into(thumbnail);
 
         if (mFileUri == null){
-            mFileUri = image_urls.get(0);
+            mFileUri = Uri.fromFile(new File(image_urls.get(0).toString()));
         }
     }
 
