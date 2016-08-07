@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -179,6 +180,11 @@ public abstract class PostListFragment extends Fragment {
                         onBookmarkClicked(userPostRef);
                     }
                 });
+
+                Glide.with(getActivity())
+                        .load(model.url)
+                        .fitCenter()
+                        .into(viewHolder.imageView);
             }
 
             public void populateLinkViewHolder(PostLinkViewHolder viewHolder, final Post model, final int position){

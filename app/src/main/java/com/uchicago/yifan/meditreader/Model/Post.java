@@ -45,7 +45,7 @@ public class Post {
         this.date = df.format(c.getTime());
     }
 
-    public Post(String uid, String type, String title, String urlString, String author, String description){
+    public Post(String uid, String type, String title, String url, String author, String description){
         this.uid = uid;
         this.author = author;
         this.post_type = type;

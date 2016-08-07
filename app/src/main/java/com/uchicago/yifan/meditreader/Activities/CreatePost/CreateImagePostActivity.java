@@ -105,7 +105,8 @@ public class CreateImagePostActivity extends CreatePostActivity {
     void createDatabasePost(String userId, String username){
         String key = mDatabase.child("posts").push().getKey();
         EditText ImageDescription = (EditText) findViewById(R.id.image_description);
-        Post post = new Post(userId, "IMAGE", null, mDownloadUrl.toString(), username, ImageDescription.getText().toString());
+        String stringUrl = mDownloadUrl.toString();
+        Post post = new Post(userId, "IMAGE", null, stringUrl, username, ImageDescription.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 
