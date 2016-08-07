@@ -40,8 +40,8 @@ public class PostQuoteViewHolder extends RecyclerView.ViewHolder{
         dateView.setText(post.date);
         numStarsView.setText(String.valueOf(post.starCount));
         numCommentView.setText("responses " + String.valueOf(post.commentCount));
-        titleView.setText(post.title);
-        bodyView.setText(post.description);
+        titleView.setText("\"" + post.title + "\"");
+        bodyView.setText(" -  " + post.description);
         starView.setOnClickListener(starClickListener);
         bookmarkView.setOnClickListener(bookmarkClickListener);
     }

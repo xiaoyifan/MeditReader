@@ -33,7 +33,6 @@ public class PostLinkViewHolder extends RecyclerView.ViewHolder{
         bookmarkView = (ImageView)itemView.findViewById(R.id.bookmark);
         numCommentView = (TextView)itemView.findViewById(R.id.post_num_comment);
         linkTitleView = (TextView)itemView.findViewById(R.id.link_title_view);
-        linkView = (TextView)itemView.findViewById(R.id.link_view);
         linkDescriptionView = (TextView) itemView.findViewById(R.id.link_description_view);
     }
 
@@ -42,8 +41,7 @@ public class PostLinkViewHolder extends RecyclerView.ViewHolder{
         dateView.setText(post.date);
         numStarsView.setText(String.valueOf(post.starCount));
         numCommentView.setText("responses " + String.valueOf(post.commentCount));
-        linkTitleView.setText(post.title);
-        linkView.setText(post.url);
+        linkTitleView.setText(post.title + "  >");
         linkDescriptionView.setText(post.description);
         starView.setOnClickListener(starClickListener);
         bookmarkView.setOnClickListener(bookmarkClickListener);
