@@ -144,7 +144,7 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Launch PostDetailActivity
@@ -204,7 +204,7 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Launch PostDetailActivity
@@ -259,7 +259,7 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Launch PostDetailActivity
@@ -314,7 +314,7 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Launch PostDetailActivity
