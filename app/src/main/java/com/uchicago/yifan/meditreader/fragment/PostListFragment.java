@@ -1,6 +1,7 @@
 package com.uchicago.yifan.meditreader.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
+import com.uchicago.yifan.meditreader.Activities.PostDetailActivity;
 import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.ViewHolder.PostImageViewHolder;
@@ -142,6 +144,16 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Launch PostDetailActivity
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
+                    }
+                });
+
                 if (model.stars.containsKey(getUid())){
                     viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
                 }
@@ -192,6 +204,16 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Launch PostDetailActivity
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
+                    }
+                });
+
                 if (model.stars.containsKey(getUid())){
                     viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
                 }
@@ -237,6 +259,16 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Launch PostDetailActivity
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
+                    }
+                });
+
                 if (model.stars.containsKey(getUid())){
                     viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
                 }
@@ -281,6 +313,16 @@ public abstract class PostListFragment extends Fragment {
 
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
+
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Launch PostDetailActivity
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
+                    }
+                });
 
                 if (model.stars.containsKey(getUid())){
                     viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
