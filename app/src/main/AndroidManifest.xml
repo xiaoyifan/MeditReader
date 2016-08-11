@@ -45,7 +45,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Activities.PostDetailActivity"></activity>
+        <activity android:name=".Activities.PostDetailActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>

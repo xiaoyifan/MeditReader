@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,6 +23,24 @@
         android:layout_alignParentTop="true"
         android:clipToPadding="false"
         android:padding="5dp"
+        android:layout_weight="99"
+        android:gravity="center"
         android:scrollbars="vertical" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/editor"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <View
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/holo_red_dark"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:scrollbars="none">
+
+    </View>
+
+</LinearLayout>
