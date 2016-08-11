@@ -27,20 +27,29 @@
         android:gravity="center"
         android:scrollbars="vertical" />
 
-    <EditText
-        android:id="@+id/editor"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
 
-    <View
+    <LinearLayout
         android:layout_height="60dp"
         android:layout_width="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/holo_red_dark"
-        android:paddingLeft="16dp"
+        android:background="@android:color/white"
+
         android:paddingTop="16dp"
+        android:orientation="horizontal"
         android:scrollbars="none">
 
-    </View>
+        <EditText
+            android:id="@+id/comment_input_view"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/post_comment_button"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="POST"/>
+
+    </LinearLayout>
 
 </LinearLayout>
