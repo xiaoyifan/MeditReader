@@ -1,6 +1,7 @@
 package com.uchicago.yifan.meditreader.Activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.database.DatabaseReference;
@@ -16,6 +17,8 @@ public class PostDetailActivity extends BaseActivity {
     private DatabaseReference mCommentsReference;
     private ValueEventListener mPostListener;
     private String mPostKey;
+
+    private RecyclerView recyclerView;
 
     public static final String EXTRA_POST_KEY = "post_key";
 
@@ -38,5 +41,11 @@ public class PostDetailActivity extends BaseActivity {
                 .child("posts").child(mPostKey);
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
                 .child("post-comments").child(mPostKey);
+
+        recyclerView = (RecyclerView)findViewById(R.id.comment_list);
+        recyclerView.setHasFixedSize(true);
     }
+
+
+
 }
