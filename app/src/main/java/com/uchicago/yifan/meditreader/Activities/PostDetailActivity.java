@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,9 +68,32 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
                 .child("post-comments").child(mPostKey);
 
-        commentInputView = (EditText)findViewById(R.id.comment_input_view);
         commentPostButton = (Button)findViewById(R.id.comment_post_button);
         commentPostButton.setOnClickListener(this);
+        commentInputView = (EditText)findViewById(R.id.comment_input_view);
+
+        commentInputView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() != 0)
+                {
+                    commentPostButton.setEnabled(true);
+                }
+                else {
+                    commentPostButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         recyclerView = (RecyclerView)findViewById(R.id.comment_list);
         recyclerView.setHasFixedSize(true);
