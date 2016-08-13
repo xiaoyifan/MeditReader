@@ -20,6 +20,9 @@ import com.uchicago.yifan.meditreader.Model.Comment;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PostDetailActivity extends BaseActivity implements View.OnClickListener{
 
     private static final String TAG = "PostDetailActivity";
@@ -141,6 +144,13 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                         // Push the comment, it will appear in the list
                         mCommentsReference.push().setValue(comment);
 
+
+
+                        Map<String, Object> childUpdates = new HashMap<>();
+                        childUpdates.put("/posts/" + mPostKey + "/commentCount", mAdapter.mCommentIds.size()+1);
+                        childUpdates.put("/user-posts/" + uid + "/" + mPostKey + "/commentCount", mAdapter.mCommentIds.size()+1);
+
+                        FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates);
                         // Clear the field
                         commentInputView.setText(null);
                     }

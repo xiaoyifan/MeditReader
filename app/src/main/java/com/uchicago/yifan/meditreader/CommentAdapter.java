@@ -29,8 +29,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
 
-    private List<String> mCommentIds = new ArrayList<>();
-    private List<Comment> mComments = new ArrayList<>();
+    public List<String> mCommentIds = new ArrayList<>();
+    public List<Comment> mComments = new ArrayList<>();
 
     public CommentAdapter(final Context context, DatabaseReference ref) {
         mContext = context;
