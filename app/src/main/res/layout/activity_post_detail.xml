@@ -45,7 +45,7 @@
             android:layout_height="match_parent"/>
 
         <Button
-            android:id="@+id/post_comment_button"
+            android:id="@+id/comment_post_button"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"

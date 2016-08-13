@@ -1,16 +1,24 @@
 package com.uchicago.yifan.meditreader.Activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uchicago.yifan.meditreader.CommentAdapter;
+import com.uchicago.yifan.meditreader.Model.Comment;
+import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 
-public class PostDetailActivity extends BaseActivity {
+public class PostDetailActivity extends BaseActivity implements View.OnClickListener{
 
     private static final String TAG = "PostDetailActivity";
 
@@ -19,7 +27,12 @@ public class PostDetailActivity extends BaseActivity {
     private ValueEventListener mPostListener;
     private String mPostKey;
 
+    private CommentAdapter mAdapter;
     private RecyclerView recyclerView;
+
+
+    private EditText commentInputView;
+    private Button commentPostButton;
 
     public static final String EXTRA_POST_KEY = "post_key";
 
@@ -53,10 +66,64 @@ public class PostDetailActivity extends BaseActivity {
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
                 .child("post-comments").child(mPostKey);
 
+        commentInputView = (EditText)findViewById(R.id.comment_input_view);
+        commentPostButton = (Button)findViewById(R.id.comment_post_button);
+        commentPostButton.setOnClickListener(this);
+
         recyclerView = (RecyclerView)findViewById(R.id.comment_list);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        mAdapter = new CommentAdapter(this, mCommentsReference);
+        recyclerView.setAdapter(mAdapter);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mAdapter.cleanupListener();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.comment_post_button:
+                postComment();
+                break;
+        }
+    }
+
+    private void postComment() {
+        final String uid = getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user information
+                        User user = dataSnapshot.getValue(User.class);
+                        String authorName = user.username;
+
+                        // Create new comment object
+                        String commentText = commentInputView.getText().toString();
+                        Comment comment = new Comment(uid, authorName, commentText);
+
+                        // Push the comment, it will appear in the list
+                        mCommentsReference.push().setValue(comment);
+
+                        // Clear the field
+                        commentInputView.setText(null);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
 }
