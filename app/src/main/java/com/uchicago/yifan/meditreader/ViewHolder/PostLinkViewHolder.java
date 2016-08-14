@@ -20,7 +20,6 @@ public class PostLinkViewHolder extends RecyclerView.ViewHolder{
     public ImageView bookmarkView;
     public TextView numCommentView;
     public TextView linkTitleView;
-    public TextView linkView;
     public TextView linkDescriptionView;
 
     public PostLinkViewHolder(View itemView) {
