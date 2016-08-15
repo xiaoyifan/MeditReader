@@ -58,6 +58,8 @@ import com.uchicago.yifan.meditreader.widget.ClipRevealFrame;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -158,7 +160,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         });
 
 
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(R.drawable.profile).withIdentifier(100);
+        final IProfile profile = new ProfileDrawerItem().withName("New user").withEmail("newuser@gmail.com").withIcon(R.drawable.profile).withIdentifier(100);
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
@@ -182,9 +184,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         new PrimaryDrawerItem().withName(R.string.drawer_item_bookmark).withIcon(FontAwesome.Icon.faw_bookmark).withIdentifier(2),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_logout).withIcon(FontAwesome.Icon.faw_sign_out).withIdentifier(3),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withIdentifier(4),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(5),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_bullhorn).withIdentifier(6))
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_bullhorn).withIdentifier(5))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -199,16 +200,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                                 finish();
                                 break;
                             case 4:
+                                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/xiaoyifan/MeditReader"));
+                                startActivity(intent);
                                 break;
                             case 5:
-                                break;
-                            case 6:
+                                showDialog();
                                 break;
                             default:
                                 break;
                         }
 
-                        return false;
+                        return true;
                     }
                 })
                 .withSavedInstance(savedInstanceState)
@@ -220,6 +222,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
 
         updateDrawerProfile(profile);
+    }
+
+    private void showDialog(){
+        new SweetAlertDialog(this)
+                .setTitleText("Contact me")
+                .setContentText("This is an app I built to learn Android & Firebase, and it still has a large space to be promoted with better experience and advanced functions. so shoot me your advice! My Email: xiaoyifanno1@gmail.com")
+                .show();
     }
 
     private void updateDrawerProfile(final IProfile profile){
