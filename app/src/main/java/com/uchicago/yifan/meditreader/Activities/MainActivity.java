@@ -172,6 +172,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 )
                 .withSavedInstance(savedInstanceState)
                 .withSelectionListEnabledForSingleProfile(false)
+                .withOnAccountHeaderProfileImageListener(new AccountHeader.OnAccountHeaderProfileImageListener() {
+                    @Override
+                    public boolean onProfileImageClick(View view, IProfile profile, boolean current) {
+                        showUpdateImageDialog();
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onProfileImageLongClick(View view, IProfile profile, boolean current) {
+                        return false;
+                    }
+                })
                 .build();
 
         //Create the drawer
@@ -228,6 +240,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         new SweetAlertDialog(this)
                 .setTitleText("Contact me")
                 .setContentText("This is an app I built to learn Android & Firebase, and it still has a large space to be promoted with better experience and advanced functions. so shoot me your advice! My Email: xiaoyifanno1@gmail.com")
+                .show();
+    }
+
+    private void showUpdateImageDialog(){
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Wanna update profile avtar?")
+                .setConfirmText("Yes")
+                .setCancelText("Cancel")
+                .showCancelButton(true)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.cancel();
+                    }
+                })
                 .show();
     }
 
