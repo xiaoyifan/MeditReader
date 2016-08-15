@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -24,6 +25,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpicker.Config;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
@@ -42,6 +47,7 @@ import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateImagePostActiv
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateLinkPostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateQuotePostActivity;
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateTextPostActivity;
+import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
 import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
@@ -151,7 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         });
 
 
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(R.drawable.profile);
+        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(R.drawable.profile).withIdentifier(100);
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
@@ -203,9 +209,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             result.setSelection(5, false);
         }
 
-//        //set the back arrow in the toolbar
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(false);
+        updateDrawerProfile(profile);
+    }
+
+    private void updateDrawerProfile(final IProfile profile){
+        final String userId = getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+
+                        if (user == null){
+                            Log.e(TAG, "User " + userId + " is unexpectedly null");
+                            Toast.makeText(MainActivity.this,
+                                    "Error: could not fetch user.",
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+                            profile.withName(user.username);
+                            profile.withEmail(user.email);
+                            profile.withIcon("https://avatars0.githubusercontent.com/u/9085563?v=3&s=460");
+                            headerResult.updateProfile(profile);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    }
+                }
+        );
     }
 
     @Override
