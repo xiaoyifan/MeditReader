@@ -10,6 +10,7 @@ import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -25,11 +26,16 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpicker.Config;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
@@ -55,8 +61,11 @@ import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
 import com.uchicago.yifan.meditreader.widget.AnimatorUtils;
 import com.uchicago.yifan.meditreader.widget.ClipRevealFrame;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -68,12 +77,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private static final String KEY_DEMO = "demo";
     Toast toast = null;
 
+    private static final String NotDoing = "NotTaking";
+    private static final String PicturePost = "TakingPicture";
+    private static final String UploadingAvatar = "UploadingAvatar";
+
+    private String imagePickerStatus = NotDoing;
+
     private FragmentPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
     View rootLayout;
     ClipRevealFrame menuLayout;
     ArcLayout arcLayout;
     View centerItem;
+
+    private IProfile profile;
 
     private AccountHeader headerResult = null;
     private Drawer result = null;
@@ -160,7 +177,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         });
 
 
-        final IProfile profile = new ProfileDrawerItem().withName("New user").withEmail("newuser@gmail.com").withIcon(R.drawable.profile).withIdentifier(100);
+        this.profile = new ProfileDrawerItem().withName("New user").withEmail("newuser@gmail.com").withIcon(R.drawable.profile).withIdentifier(100);
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
@@ -222,7 +239,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                                 break;
                         }
 
-                        return true;
+                        return false;
                     }
                 })
                 .withSavedInstance(savedInstanceState)
@@ -246,12 +263,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private void showUpdateImageDialog(){
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Wanna update profile avtar?")
-                .setConfirmText("Yes")
+                .setConfirmText("Sure")
                 .setCancelText("Cancel")
                 .showCancelButton(true)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
+                        getImages(UploadingAvatar);
                         sDialog.cancel();
                     }
                 })
@@ -274,7 +292,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         }else{
                             profile.withName(user.username);
                             profile.withEmail(user.email);
-                            profile.withIcon("https://avatars0.githubusercontent.com/u/9085563?v=3&s=460");
+
+                            if (user.avatarUri != null){
+                                profile.withIcon(user.avatarUri);
+                            }
+
                             headerResult.updateProfile(profile);
                         }
                     }
@@ -441,7 +463,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
          switch ((String)v.getTag())
          {
              case "photoTag":
-                getImages();
+                getImages(PicturePost);
                  break;
              case "quoteTag":
                  startActivity(new Intent(this, CreateQuotePostActivity.class));
@@ -459,7 +481,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     }
 
-    private void getImages() {
+    private void getImages(String code) {
+        imagePickerStatus = code;
         Config config = new Config();
         config.setSelectionMin(1);
         config.setSelectionLimit(1);
@@ -477,10 +500,49 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
             ArrayList<Uri>  image_uris = intent.getParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS);
 
-            Intent imageIntent = new Intent(this, CreateImagePostActivity.class);
-            imageIntent.putParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS, image_uris);
-            startActivity(imageIntent);
+            if (imagePickerStatus == PicturePost){
+                Intent imageIntent = new Intent(this, CreateImagePostActivity.class);
+                imageIntent.putParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS, image_uris);
+                startActivity(imageIntent);
+            }
+            else if (imagePickerStatus == UploadingAvatar){
+
+                Uri mFileUri = Uri.fromFile(new File(image_uris.get(0).toString()));
+                StorageReference photoRef = FirebaseStorage.getInstance().getReference().child("photos").child(mFileUri.getLastPathSegment());
+
+                photoRef.putFile(mFileUri)
+                        .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Uri mDownloadUrl = taskSnapshot.getMetadata().getDownloadUrl();
+                                hideProgressDialog();
+                                updateUserProfile(mDownloadUrl);
+                            }
+                        })
+                        .addOnFailureListener(this, new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Uri mDownloadUrl =  null;
+                                hideProgressDialog();
+                                Toast.makeText(MainActivity.this, "Error: upload failed",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+            }
+
+            imagePickerStatus = NotDoing;
         }
+    }
+
+    public void updateUserProfile(Uri avatarUri){
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/users/" + getUid() + "/avatarUri", avatarUri.toString());
+
+        FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates);
+
+        updateDrawerProfile(this.profile);
     }
 
 }

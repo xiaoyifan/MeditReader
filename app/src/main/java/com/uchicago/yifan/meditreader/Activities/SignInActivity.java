@@ -15,8 +15,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 
@@ -125,11 +128,26 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 });
     }
 
-    private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
+    private void onAuthSuccess(final FirebaseUser user) {
+        final String username = usernameFromEmail(user.getEmail());
 
-        // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
+        final String userId = getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User newUser = dataSnapshot.getValue(User.class);
+                        if (newUser == null){
+                            writeNewUser(user.getUid(), username, user.getEmail());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    }
+                }
+        );
 
         // Go to MainActivity
         startActivity(new Intent(SignInActivity.this, MainActivity.class));
@@ -145,7 +163,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+        User user = new User(name, email, "");
 
         mDatabase.child("users").child(userId).setValue(user);
     }
