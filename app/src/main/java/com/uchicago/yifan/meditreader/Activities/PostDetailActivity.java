@@ -139,7 +139,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
                         // Create new comment object
                         String commentText = commentInputView.getText().toString();
-                        Comment comment = new Comment(uid, authorName, commentText);
+                        Comment comment = new Comment(uid, commentText);
 
                         // Push the comment, it will appear in the list
                         mCommentsReference.push().setValue(comment);

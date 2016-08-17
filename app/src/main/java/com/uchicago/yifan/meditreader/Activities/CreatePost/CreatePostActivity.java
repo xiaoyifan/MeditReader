@@ -66,7 +66,7 @@ public abstract class CreatePostActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         }else{
 
-                            writeNewPost(getUid(), user.username);
+                            writeNewPost(getUid());
                         }
                     }
 
@@ -78,5 +78,5 @@ public abstract class CreatePostActivity extends BaseActivity {
         );
     }
 
-    abstract void writeNewPost(String userId, String username);
+    abstract void writeNewPost(String userId);
 }

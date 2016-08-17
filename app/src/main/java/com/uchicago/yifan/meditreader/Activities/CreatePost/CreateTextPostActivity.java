@@ -17,12 +17,12 @@ public class CreateTextPostActivity extends CreatePostActivity {
     }
 
     @Override
-    void writeNewPost(String userId, String username) {
+    void writeNewPost(String userId) {
 
         String key = mDatabase.child("posts").push().getKey();
         EditText TextTitle = (EditText) findViewById(R.id.text_title);
         EditText TextContent = (EditText) findViewById(R.id.text_content);
-        Post post = new Post(userId, "TEXT", TextTitle.getText().toString(), username, TextContent.getText().toString());
+        Post post = new Post(userId, "TEXT", TextTitle.getText().toString(), TextContent.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 

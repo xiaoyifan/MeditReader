@@ -77,7 +77,7 @@ public class CreateImagePostActivity extends CreatePostActivity {
     }
 
     @Override
-    void writeNewPost(final String userId, final String username) {
+    void writeNewPost(final String userId) {
 
         final StorageReference photoRef = mStorageRef.child("photos").child(mFileUri.getLastPathSegment());
         showProgressDialog();
@@ -88,7 +88,7 @@ public class CreateImagePostActivity extends CreatePostActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         mDownloadUrl = taskSnapshot.getMetadata().getDownloadUrl();
                         hideProgressDialog();
-                        createDatabasePost(userId, username);
+                        createDatabasePost(userId);
                     }
                 })
                 .addOnFailureListener(this, new OnFailureListener() {
@@ -102,11 +102,11 @@ public class CreateImagePostActivity extends CreatePostActivity {
                 });
     }
 
-    void createDatabasePost(String userId, String username){
+    void createDatabasePost(String userId){
         String key = mDatabase.child("posts").push().getKey();
         EditText ImageDescription = (EditText) findViewById(R.id.image_description);
         String stringUrl = mDownloadUrl.toString();
-        Post post = new Post(userId, "IMAGE", null, stringUrl, username, ImageDescription.getText().toString());
+        Post post = new Post(userId, "IMAGE", null, stringUrl, ImageDescription.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 

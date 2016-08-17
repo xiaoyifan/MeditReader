@@ -137,7 +137,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     public void onBindViewHolder(CommentViewHolder holder, int position) {
 
         Comment comment = mComments.get(position);
-        holder.authorNameView.setText(comment.author);
+        //holder.authorNameView.setText(comment.author);
         holder.bodyView.setText(comment.text);
     }
 

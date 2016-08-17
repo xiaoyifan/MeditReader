@@ -16,13 +16,13 @@ public class CreateLinkPostActivity extends CreatePostActivity {
     }
 
     @Override
-    void writeNewPost(String userId, String username) {
+    void writeNewPost(String userId) {
 
         String key = mDatabase.child("posts").push().getKey();
         EditText linkTitle = (EditText) findViewById(R.id.link_title);
         EditText linkURL = (EditText) findViewById(R.id.link_url);
         EditText linkDescription = (EditText) findViewById(R.id.link_description);
-        Post post = new Post(userId, "LINK", linkTitle.getText().toString(), linkURL.getText().toString(), username, linkDescription.getText().toString());
+        Post post = new Post(userId, "LINK", linkTitle.getText().toString(), linkURL.getText().toString(), linkDescription.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 

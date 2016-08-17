@@ -16,12 +16,12 @@ public class CreateQuotePostActivity extends CreatePostActivity {
     }
 
     @Override
-    void writeNewPost(String userId, String username) {
+    void writeNewPost(String userId) {
 
         String key = mDatabase.child("posts").push().getKey();
         EditText QuoteText = (EditText) findViewById(R.id.quote_text);
         EditText QuoteSource = (EditText) findViewById(R.id.quote_source);
-        Post post = new Post(userId, "QUOTE", QuoteText.getText().toString(), username, QuoteSource.getText().toString());
+        Post post = new Post(userId, "QUOTE", QuoteText.getText().toString(), QuoteSource.getText().toString());
 
         Map<String, Object> postValues = post.toMap();
 

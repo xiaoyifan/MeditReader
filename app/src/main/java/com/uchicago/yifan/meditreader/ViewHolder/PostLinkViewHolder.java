@@ -36,7 +36,7 @@ public class PostLinkViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener, View.OnClickListener bookmarkClickListener) {
-        authorView.setText(post.author);
+        //authorView.setText(post.author);
         dateView.setText(post.date);
         numStarsView.setText(String.valueOf(post.starCount));
         numCommentView.setText("responses " + String.valueOf(post.commentCount));

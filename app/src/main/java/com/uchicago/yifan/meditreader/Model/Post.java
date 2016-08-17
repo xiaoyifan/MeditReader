@@ -15,7 +15,6 @@ import java.util.Map;
 public class Post {
 
     public String uid;
-    public String author;
     public String title;
     public String url;
     public String date;
@@ -31,9 +30,8 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(String uid, String type, String title, String author, String description){
+    public Post(String uid, String type, String title, String description){
         this.uid = uid;
-        this.author = author;
         this.post_type = type;
         this.title = title;
         this.description = description;
@@ -45,9 +43,8 @@ public class Post {
         this.date = df.format(c.getTime());
     }
 
-    public Post(String uid, String type, String title, String url, String author, String description){
+    public Post(String uid, String type, String title, String url, String description){
         this.uid = uid;
-        this.author = author;
         this.post_type = type;
         this.title = title;
         this.url = url;
@@ -64,7 +61,6 @@ public class Post {
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
-        result.put("author", author);
         result.put("post_type", post_type.toString());
         result.put("title", title);
         result.put("description", description);
