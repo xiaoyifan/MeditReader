@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -23,8 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Activities.PostDetailActivity;
 import com.uchicago.yifan.meditreader.Model.Post;
+import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.ViewHolder.PostImageViewHolder;
 import com.uchicago.yifan.meditreader.ViewHolder.PostLinkViewHolder;
@@ -140,7 +143,7 @@ public abstract class PostListFragment extends Fragment {
             }
 
 
-            public void populateImageViewHolder(PostImageViewHolder viewHolder, final Post model, final int position){
+            public void populateImageViewHolder(final PostImageViewHolder viewHolder, final Post model, final int position){
 
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
@@ -168,6 +171,36 @@ public abstract class PostListFragment extends Fragment {
                 else {
                     viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
                 }
+
+                final String userId = model.uid;
+                mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+
+                                if (user == null){
+                                    Log.e(TAG, "User " + userId + " is unexpectedly null");
+                                    Toast.makeText(getContext(),
+                                            "Error: could not fetch user.",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+
+                                    viewHolder.authorView.setText(user.username);
+                                    //viewHolder.authorAvatar;
+                                    Glide.with(getActivity())
+                                            .load(user.avatarUri)
+                                            .fitCenter()
+                                            .into(viewHolder.authorAvatar);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                            }
+                        }
+                );
 
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
@@ -200,7 +233,7 @@ public abstract class PostListFragment extends Fragment {
                         .into(viewHolder.imageView);
             }
 
-            public void populateLinkViewHolder(PostLinkViewHolder viewHolder, final Post model, final int position){
+            public void populateLinkViewHolder(final PostLinkViewHolder viewHolder, final Post model, final int position){
 
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
@@ -238,6 +271,36 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
                 }
 
+                final String userId = model.uid;
+                mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+
+                                if (user == null){
+                                    Log.e(TAG, "User " + userId + " is unexpectedly null");
+                                    Toast.makeText(getContext(),
+                                            "Error: could not fetch user.",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+
+                                    viewHolder.authorView.setText(user.username);
+                                    //viewHolder.authorAvatar;
+                                    Glide.with(getActivity())
+                                            .load(user.avatarUri)
+                                            .fitCenter()
+                                            .into(viewHolder.authorAvatar);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                            }
+                        }
+                );
+
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
                     public void onClick(View startView) {
@@ -264,7 +327,7 @@ public abstract class PostListFragment extends Fragment {
                 });
             }
 
-            public void populateTextViewHolder(PostTextViewHolder viewHolder, final Post model, final int position){
+            public void populateTextViewHolder(final PostTextViewHolder viewHolder, final Post model, final int position){
 
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
@@ -293,6 +356,36 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
                 }
 
+                final String userId = model.uid;
+                mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+
+                                if (user == null){
+                                    Log.e(TAG, "User " + userId + " is unexpectedly null");
+                                    Toast.makeText(getContext(),
+                                            "Error: could not fetch user.",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+
+                                    viewHolder.authorView.setText(user.username);
+                                    //viewHolder.authorAvatar;
+                                    Glide.with(getActivity())
+                                            .load(user.avatarUri)
+                                            .fitCenter()
+                                            .into(viewHolder.authorAvatar);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                            }
+                        }
+                );
+
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
                     public void onClick(View startView) {
@@ -319,7 +412,7 @@ public abstract class PostListFragment extends Fragment {
                 });
             }
 
-            public void populateQuoteViewHolder(PostQuoteViewHolder viewHolder, final Post model, final int position){
+            public void populateQuoteViewHolder(final PostQuoteViewHolder viewHolder, final Post model, final int position){
 
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
@@ -347,6 +440,36 @@ public abstract class PostListFragment extends Fragment {
                 else {
                     viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
                 }
+
+                final String userId = model.uid;
+                mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+
+                                if (user == null){
+                                    Log.e(TAG, "User " + userId + " is unexpectedly null");
+                                    Toast.makeText(getContext(),
+                                            "Error: could not fetch user.",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+
+                                    viewHolder.authorView.setText(user.username);
+                                    //viewHolder.authorAvatar;
+                                    Glide.with(getActivity())
+                                            .load(user.avatarUri)
+                                            .fitCenter()
+                                            .into(viewHolder.authorAvatar);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                            }
+                        }
+                );
 
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override

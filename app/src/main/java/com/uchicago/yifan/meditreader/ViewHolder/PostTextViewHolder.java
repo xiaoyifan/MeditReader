@@ -14,6 +14,7 @@ import com.uchicago.yifan.meditreader.R;
 public class PostTextViewHolder extends RecyclerView.ViewHolder{
 
     public TextView authorView;
+    public ImageView authorAvatar;
     public TextView dateView;
     public ImageView starView;
     public TextView numStarsView;
@@ -25,6 +26,7 @@ public class PostTextViewHolder extends RecyclerView.ViewHolder{
     public PostTextViewHolder(View itemView) {
         super(itemView);
 
+        authorAvatar = (ImageView)itemView.findViewById(R.id.post_author_photo);
         dateView = (TextView)itemView.findViewById(R.id.post_date);
         authorView = (TextView) itemView.findViewById(R.id.post_author);
         starView = (ImageView) itemView.findViewById(R.id.heart);
