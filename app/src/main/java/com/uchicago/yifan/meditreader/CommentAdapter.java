@@ -8,11 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Model.Comment;
+import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.ViewHolder.CommentViewHolder;
 
 import java.util.ArrayList;
@@ -134,11 +138,41 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CommentViewHolder holder, int position) {
+    public void onBindViewHolder(final CommentViewHolder holder, int position) {
 
         Comment comment = mComments.get(position);
         //holder.authorNameView.setText(comment.author);
         holder.bodyView.setText(comment.text);
+
+        final String userId = comment.uid;
+        FirebaseDatabase.getInstance().getReference().child("users").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+
+                        if (user == null){
+                            Log.e(TAG, "User " + userId + " is unexpectedly null");
+                            Toast.makeText(mContext,
+                                    "Error: could not fetch user.",
+                                    Toast.LENGTH_SHORT).show();
+                        }else{
+
+                            holder.authorNameView.setText(user.username);
+                            //viewHolder.authorAvatar;
+                            Glide.with(mContext)
+                                    .load(user.avatarUri)
+                                    .fitCenter()
+                                    .into(holder.authorAvatarView);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                    }
+                }
+        );
     }
 
     @Override
