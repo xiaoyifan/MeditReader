@@ -29,10 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.CreatePost.CreateTextPostActivity" />
-        <activity android:name=".Activities.CreatePost.CreateLinkPostActivity" />
-        <activity android:name=".Activities.CreatePost.CreateImagePostActivity" />
-        <activity android:name=".Activities.CreatePost.CreateQuotePostActivity" />
+        <activity android:name=".Activities.CreatePost.CreateTextPostActivity"
+            android:theme="@style/AppThemeWithToolbar"/>
+        <activity android:name=".Activities.CreatePost.CreateLinkPostActivity"
+            android:theme="@style/AppThemeWithToolbar"/>
+        <activity android:name=".Activities.CreatePost.CreateImagePostActivity"
+            android:theme="@style/AppThemeWithToolbar"/>
+        <activity android:name=".Activities.CreatePost.CreateQuotePostActivity"
+            android:theme="@style/AppThemeWithToolbar"/>
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
             android:screenOrientation="portrait"
