@@ -163,6 +163,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
                             Glide.with(mContext)
                                     .load(user.avatarUri)
                                     .fitCenter()
+                                    .placeholder(R.drawable.ic_action_account_circle_40)
                                     .into(holder.authorAvatarView);
                         }
                     }

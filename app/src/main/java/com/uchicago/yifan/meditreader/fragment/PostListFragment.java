@@ -191,6 +191,7 @@ public abstract class PostListFragment extends Fragment {
                                     Glide.with(getActivity())
                                             .load(user.avatarUri)
                                             .fitCenter()
+                                            .placeholder(R.drawable.ic_action_account_circle_40)
                                             .into(viewHolder.authorAvatar);
                                 }
                             }
@@ -230,6 +231,7 @@ public abstract class PostListFragment extends Fragment {
                 Glide.with(getActivity())
                         .load(model.url)
                         .fitCenter()
+                        .placeholder(R.drawable.ic_action_account_circle_40)
                         .into(viewHolder.imageView);
             }
 
@@ -290,6 +292,7 @@ public abstract class PostListFragment extends Fragment {
                                     Glide.with(getActivity())
                                             .load(user.avatarUri)
                                             .fitCenter()
+                                            .placeholder(R.drawable.ic_action_account_circle_40)
                                             .into(viewHolder.authorAvatar);
                                 }
                             }
@@ -375,6 +378,7 @@ public abstract class PostListFragment extends Fragment {
                                     Glide.with(getActivity())
                                             .load(user.avatarUri)
                                             .fitCenter()
+                                            .placeholder(R.drawable.ic_action_account_circle_40)
                                             .into(viewHolder.authorAvatar);
                                 }
                             }
@@ -460,6 +464,7 @@ public abstract class PostListFragment extends Fragment {
                                     Glide.with(getActivity())
                                             .load(user.avatarUri)
                                             .fitCenter()
+                                            .placeholder(R.drawable.ic_action_account_circle_40)
                                             .into(viewHolder.authorAvatar);
                                 }
                             }
