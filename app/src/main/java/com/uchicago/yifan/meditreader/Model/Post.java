@@ -23,8 +23,6 @@ public class Post {
     public int commentCount = 0;
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
-    public Map<String, Boolean> bookmarks = new HashMap<>();
-
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
@@ -69,7 +67,6 @@ public class Post {
         result.put("starCount", starCount);
         result.put("commentCount", commentCount);
         result.put("stars", stars);
-        result.put("bookmarks", bookmarks);
 
         return result;
     }

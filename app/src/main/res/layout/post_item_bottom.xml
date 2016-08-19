@@ -23,7 +23,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="?attr/selectableItemBackground"
-            android:src="@drawable/hearts_50" />
+            android:src="@drawable/like_48" />
 
         <TextView
             android:id="@+id/post_num_stars"
@@ -62,7 +62,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="?attr/selectableItemBackground"
-            android:src="@drawable/bookmark_ribbon_50"
+            android:src="@drawable/comments_48"
             android:layout_gravity="right" />
 
     </LinearLayout>

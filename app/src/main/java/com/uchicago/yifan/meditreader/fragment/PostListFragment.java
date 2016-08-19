@@ -151,28 +151,11 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
-                        startActivity(intent);
-                    }
-                });
-
                 if (model.stars.containsKey(getUid())){
-                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_filled_48);
                 }
                 else {
-                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
-                }
-
-                if (model.bookmarks.containsKey(getUid())){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
-                }
-                else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
                 final String userId = model.uid;
@@ -220,15 +203,10 @@ public abstract class PostListFragment extends Fragment {
                     }
                 }, new View.OnClickListener() {
                     @Override
-                    public void onClick(View bookmarkView) {
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-                        DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(getUid());
-
-                        // Run two transactions
-                        onBookmarkClicked(globalPostRef);
-                        onBookmarkClicked(userPostRef);
-                        updateBookmarkForUser(userBookmarkRef, model, postRef.getKey());
+                    public void onClick(View commentView) {
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
                     }
                 });
 
@@ -243,16 +221,6 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
-                        startActivity(intent);
-                    }
-                });
-
                 viewHolder.linkTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -263,17 +231,10 @@ public abstract class PostListFragment extends Fragment {
                 });
 
                 if (model.stars.containsKey(getUid())){
-                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_filled_48);
                 }
                 else {
-                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
-                }
-
-                if (model.bookmarks.containsKey(getUid())){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
-                }
-                else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
                 final String userId = model.uid;
@@ -321,15 +282,10 @@ public abstract class PostListFragment extends Fragment {
                     }
                 }, new View.OnClickListener() {
                     @Override
-                    public void onClick(View bookmarkView) {
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-                        DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(getUid());
-
-                        // Run two transactions
-                        onBookmarkClicked(globalPostRef);
-                        onBookmarkClicked(userPostRef);
-                        updateBookmarkForUser(userBookmarkRef, model, postRef.getKey());
+                    public void onClick(View commentView) {
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
                     }
                 });
             }
@@ -339,28 +295,11 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
-                viewHolder.numCommentView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
-                        startActivity(intent);
-                    }
-                });
-
                 if (model.stars.containsKey(getUid())){
-                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_filled_48);
                 }
                 else {
-                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
-                }
-
-                if (model.bookmarks.containsKey(getUid())){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
-                }
-                else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
                 final String userId = model.uid;
@@ -408,15 +347,10 @@ public abstract class PostListFragment extends Fragment {
                     }
                 }, new View.OnClickListener() {
                     @Override
-                    public void onClick(View bookmarkView) {
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-                        DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(getUid());
-
-                        // Run two transactions
-                        onBookmarkClicked(globalPostRef);
-                        onBookmarkClicked(userPostRef);
-                        updateBookmarkForUser(userBookmarkRef, model, postRef.getKey());
+                    public void onClick(View commentView) {
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
                     }
                 });
             }
@@ -437,17 +371,10 @@ public abstract class PostListFragment extends Fragment {
                 });
 
                 if (model.stars.containsKey(getUid())){
-                    viewHolder.starView.setImageResource(R.drawable.hearts_filled_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_filled_48);
                 }
                 else {
-                    viewHolder.starView.setImageResource(R.drawable.hearts_50);
-                }
-
-                if (model.bookmarks.containsKey(getUid())){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_filled_50);
-                }
-                else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.bookmark_ribbon_50);
+                    viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
                 final String userId = model.uid;
@@ -495,15 +422,10 @@ public abstract class PostListFragment extends Fragment {
                     }
                 }, new View.OnClickListener() {
                     @Override
-                    public void onClick(View bookmarkView) {
-                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
-                        DatabaseReference userPostRef = mDatabase.child("user-posts").child(model.uid).child(postRef.getKey());
-                        DatabaseReference userBookmarkRef = mDatabase.child("bookmarks").child(getUid());
-
-                        // Run two transactions
-                        onBookmarkClicked(globalPostRef);
-                        onBookmarkClicked(userPostRef);
-                        updateBookmarkForUser(userBookmarkRef, model, postRef.getKey());
+                    public void onClick(View commentView) {
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
+                        startActivity(intent);
                     }
                 });
             }
@@ -548,36 +470,6 @@ public abstract class PostListFragment extends Fragment {
         });
     }
 
-    private void onBookmarkClicked(DatabaseReference postRef) {
-        postRef.runTransaction(new Transaction.Handler() {
-            @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
-                Post p = mutableData.getValue(Post.class);
-                if (p == null) {
-                    return Transaction.success(mutableData);
-                }
-
-                if (p.bookmarks.containsKey(getUid())) {
-                    // Unstar the post and remove self from stars
-                    p.bookmarks.remove(getUid());
-                } else {
-                    // Star the post and add self to stars
-                    p.bookmarks.put(getUid(), true);
-                }
-
-                // Set value and report transaction success
-                mutableData.setValue(p);
-                return Transaction.success(mutableData);
-            }
-
-            @Override
-            public void onComplete(DatabaseError databaseError, boolean b,
-                                   DataSnapshot dataSnapshot) {
-                // Transaction completed
-                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-            }
-        });
-    }
 
     public void updateBookmarkForUser(final DatabaseReference userBookmarkRef, final Post model, final String key){
 
