@@ -27,6 +27,7 @@
         <TextView
             android:id="@+id/comment_content"
             fontPath="charter_regular.ttf"
+            android:paddingTop="@dimen/text_view_top_padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
