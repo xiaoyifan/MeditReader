@@ -30,5 +30,7 @@
     <color name="path_green">#5FB336</color>
     <color name="path_purple">#49098A</color>
 
+    <color name="material_black">#ff000000</color>
+    <color name="material_white">#ffffffff</color>
 
 </resources>
