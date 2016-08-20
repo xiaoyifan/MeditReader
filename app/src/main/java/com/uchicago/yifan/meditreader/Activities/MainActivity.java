@@ -58,8 +58,8 @@ import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
 import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
-import com.uchicago.yifan.meditreader.widget.AnimatorUtils;
-import com.uchicago.yifan.meditreader.widget.ClipRevealFrame;
+import com.uchicago.yifan.meditreader.Utitilies.AnimatorUtils;
+import com.uchicago.yifan.meditreader.Utitilies.ClipRevealFrame;
 
 import java.io.File;
 import java.util.ArrayList;

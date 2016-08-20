@@ -28,7 +28,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tabs" />
 
-    <com.uchicago.yifan.meditreader.widget.ClipRevealFrame
+    <com.uchicago.yifan.meditreader.Utitilies.ClipRevealFrame
         android:id="@+id/menu_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,7 +77,7 @@
             android:src="@drawable/camera"
             />
 
-    </com.uchicago.yifan.meditreader.widget.ClipRevealFrame>
+    </com.uchicago.yifan.meditreader.Utitilies.ClipRevealFrame>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_new_post"
