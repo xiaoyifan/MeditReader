@@ -56,10 +56,10 @@ import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateQuotePostActiv
 import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateTextPostActivity;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
-import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
-import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
 import com.uchicago.yifan.meditreader.Utitilies.AnimatorUtils;
 import com.uchicago.yifan.meditreader.Utitilies.ClipRevealFrame;
+import com.uchicago.yifan.meditreader.fragment.MyPostsFragment;
+import com.uchicago.yifan.meditreader.fragment.TrendingPostsFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -114,37 +114,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         for (int i = 0, size = arcLayout.getChildCount(); i < size; i++) {
             arcLayout.getChildAt(i).setOnClickListener(this);
         }
-
-        mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-
-            private final Fragment[] mFragments = new Fragment[]{
-                    new TrendingPostsFragment(),
-                    new MyPostsFragment(),
-            };
-
-            private final String[] mFragmentNames = new String[]{
-                    "Trending", "My Posts"
-            };
-            @Override
-            public Fragment getItem(int position) {
-                return mFragments[position];
-            }
-
-            @Override
-            public int getCount() {
-                return mFragments.length;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return mFragmentNames[position];
-            }
-        };
-
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mPagerAdapter);
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
 
         findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,14 +217,52 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if (savedInstanceState == null) {
             result.setSelection(5, false);
         }
-
-        updateDrawerProfile(profile);
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null){
+            startActivity(new Intent(getBaseContext(), SignInActivity.class));
+            finish();
+            return;
+        }
+
+        updateDrawerProfile(profile);
+
+        mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+
+            private final Fragment[] mFragments = new Fragment[]{
+                    new TrendingPostsFragment(),
+                    new MyPostsFragment(),
+            };
+
+            private final String[] mFragmentNames = new String[]{
+                    "Trending", "My Posts"
+            };
+            @Override
+            public Fragment getItem(int position) {
+                return mFragments[position];
+            }
+
+            @Override
+            public int getCount() {
+                return mFragments.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mFragmentNames[position];
+            }
+        };
+
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mPagerAdapter);
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
         Intent intent = getIntent();
         if (intent.getData() != null){
                 getImages(PicturePost);

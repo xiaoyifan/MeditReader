@@ -1,17 +1,20 @@
 package com.uchicago.yifan.meditreader.Activities.CreatePost;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Activities.BaseActivity;
+import com.uchicago.yifan.meditreader.Activities.SignInActivity;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 
@@ -28,6 +31,17 @@ public abstract class CreatePostActivity extends BaseActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null){
+            Intent intent = new Intent(this, SignInActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     protected abstract int getLayoutResourceId();
