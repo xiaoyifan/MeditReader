@@ -5,8 +5,12 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.RemoteViews;
 
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateLinkPostActivity;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateQuotePostActivity;
+import com.uchicago.yifan.meditreader.Activities.CreatePost.CreateTextPostActivity;
 import com.uchicago.yifan.meditreader.Activities.MainActivity;
 import com.uchicago.yifan.meditreader.R;
 
@@ -26,7 +30,24 @@ public class MeditTrendingWidget extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
+        Intent quoteIntent = new Intent(context, CreateQuotePostActivity.class);
+        PendingIntent pendingQuoteIntent = PendingIntent.getActivity(context, 0, quoteIntent, 0);
+        views.setOnClickPendingIntent(R.id.quote_item, pendingQuoteIntent);
 
+        Intent linkIntent = new Intent(context, CreateLinkPostActivity.class);
+        PendingIntent pendingLinkIntent = PendingIntent.getActivity(context, 0, linkIntent, 0);
+        views.setOnClickPendingIntent(R.id.link_item, pendingLinkIntent);
+
+        Intent textIntent = new Intent(context, CreateTextPostActivity.class);
+        PendingIntent pendingTextIntent = PendingIntent.getActivity(context, 0, textIntent, 0);
+        views.setOnClickPendingIntent(R.id.text_item, pendingTextIntent);
+
+        Intent imageIntent = new Intent(context, MainActivity.class);
+        Uri widgetUri = Uri.parse(String.valueOf(R.id.camera_item));
+        imageIntent.setData(widgetUri);
+        PendingIntent pendingImageIntent = PendingIntent.getActivity(context, 0, imageIntent, 0);
+        views.setOnClickPendingIntent(R.id.camera_item, pendingImageIntent);
+        
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

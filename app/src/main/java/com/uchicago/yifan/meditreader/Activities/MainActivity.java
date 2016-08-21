@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private static final String PicturePost = "TakingPicture";
     private static final String UploadingAvatar = "UploadingAvatar";
 
-    private String imagePickerStatus = NotDoing;
+    public String imagePickerStatus = NotDoing;
 
     private FragmentPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
@@ -250,6 +250,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
 
         updateDrawerProfile(profile);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        if (intent.getData() != null){
+                getImages(PicturePost);
+        }
+
+
+
     }
 
     private void showDialog(){
@@ -480,7 +493,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     }
 
-    private void getImages(String code) {
+    public void getImages(String code) {
         imagePickerStatus = code;
         Config config = new Config();
         config.setSelectionMin(1);
