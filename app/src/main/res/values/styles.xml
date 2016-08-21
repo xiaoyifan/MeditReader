@@ -56,6 +56,13 @@
         <item name="android:textColor">@color/tumblr_primary</item>
     </style>
 
+    <style name="Item.TumblrSmall">
+        <item name="android:layout_width">@dimen/item_circle_size_small</item>
+        <item name="android:layout_height">@dimen/item_circle_size_small</item>
+        <item name="android:textSize">@dimen/item_font_size_small</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="Item.Path">
         <item name="android:layout_width">@dimen/item_circle_size_path</item>
         <item name="android:layout_height">@dimen/item_circle_size_path</item>
