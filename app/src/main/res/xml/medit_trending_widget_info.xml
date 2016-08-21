@@ -2,7 +2,7 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@layout/medit_trending_widget"
     android:initialLayout="@layout/medit_trending_widget"
-    android:minHeight="110dp"
+    android:minHeight="40dp"
     android:minWidth="250dp"
     android:previewImage="@drawable/ic_launcher"
     android:resizeMode="horizontal"

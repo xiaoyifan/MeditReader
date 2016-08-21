@@ -2,13 +2,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#09C"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/widget_margin">
 
     <FrameLayout
         android:id="@+id/widget"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/colorPrimary">
         <TextView
             android:layout_width="wrap_content"
@@ -21,26 +21,34 @@
             />
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/tumblr_blue">
-        <ListView
-            android:id="@+id/widget_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"
-            android:dividerHeight="0dp"/>
-        <TextView
-            android:id="@+id/widget_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:fontFamily="sans-serif-condensed"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="@color/material_white"
-            android:text="Empty Post"/>
-    </FrameLayout>
+    <ImageButton
+        android:id="@+id/camera_item"
+        style="@style/Item.Tumblr"
+        android:layout_gravity="center"
+        android:background="@drawable/tumblr_red_oval"
+        android:tint="@color/white"
+        android:src="@drawable/camera_white"
+        />
+
+    <ImageButton
+        style="@style/Item.Tumblr"
+        android:id="@+id/link_item"
+        android:background="@drawable/tumblr_green_oval"
+        android:src="@drawable/link_white"
+        />
+
+    <ImageButton
+        style="@style/Item.Tumblr"
+        android:id="@+id/text_item"
+        android:background="@drawable/tumblr_white_oval"
+        android:src="@drawable/letter_white"
+        />
+
+    <ImageButton
+        style="@style/Item.Tumblr"
+        android:id="@+id/quote_item"
+        android:background="@drawable/tumblr_blue_oval"
+        android:src="@drawable/quote_white"
+        />
 
 </LinearLayout>
