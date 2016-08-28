@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,7 +34,8 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     private EditText mEmailField;
     private EditText mPasswordField;
     private Button mSignInButton;
-    private Button mSignUpButton;
+
+    private CompoundButton newUserCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +49,28 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         mEmailField = (EditText) findViewById(R.id.email_text);
         mPasswordField = (EditText) findViewById(R.id.password_text);
         mSignInButton = (Button) findViewById(R.id.login_button);
-        mSignUpButton = (Button) findViewById(R.id.signup_button);
 
+        newUserCheckbox = (CompoundButton)findViewById(R.id.switch_newuser);
+        newUserCheckbox.setChecked(false);
+        newUserCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked){
+                    mSignInButton.setText(R.string.sign_up);
+                }
+                else {
+                    mSignInButton.setText(R.string.sign_in);
+                }
+            }
+        });
         mSignInButton.setOnClickListener(this);
-        mSignUpButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.login_button:
-                login();
-                break;
-            case R.id.signup_button:
-                signup();
+                loginButtonTapped();
                 break;
         }
     }
@@ -72,6 +82,17 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             onAuthSuccess(mAuth.getCurrentUser());
         }
 
+    }
+
+
+    private void loginButtonTapped(){
+
+        if (newUserCheckbox.isChecked()){
+            signup();
+        }
+        else{
+            login();
+        }
     }
 
     private void login(){
@@ -162,6 +183,14 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    public final boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email, "");
 
@@ -175,6 +204,11 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             result = false;
         } else {
             mEmailField.setError(null);
+        }
+
+        if (!isValidEmail(mEmailField.getText().toString())){
+            mEmailField.setError("Invalid E-mail");
+            result = false;
         }
 
         if (TextUtils.isEmpty(mPasswordField.getText().toString())) {

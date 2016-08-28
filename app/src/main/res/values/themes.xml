@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="button_raise_wave">
+        <item>@style/LightRaiseWaveColorButtonRippleStyle</item>
+        <item>@style/DarkRaiseWaveColorButtonRippleStyle</item>
+    </array>
+
+    <array name="checkbox">
+        <item>@style/LightCheckBoxDrawable</item>
+        <item>@style/DarkCheckBoxDrawable</item>
+    </array>
+
+</resources>
