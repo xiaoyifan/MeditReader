@@ -48,7 +48,7 @@
                     android:id="@+id/email_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="e-mail" />
+                    android:hint="@string/email" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
         </LinearLayout>
@@ -75,7 +75,8 @@
                     android:id="@+id/password_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="password" />
+                    android:inputType="textPassword"
+                    android:hint="@string/password" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
         </LinearLayout>
