@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">MeditReader</string>
 
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -19,5 +22,26 @@
     <string name="drawer_item_contact">Contact</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+
+    <!-- TODO: Create post strings -->
+    <string name="create_post_image_view_descrption">new post image</string>
+    <string name="create_post_image_comment_view_hint">Some comment about the image</string>
+
+    <!-- TODO: Create link post strings -->
+    <string name="create_link_post_title_hint">Your title</string>
+    <string name="create_link_post_url_hint">Type in or paste URL</string>
+    <string name="create_link_post_comment_hint">Some comment</string>
+
+    <!-- TODO: Create quote post strings -->
+    <string name="create_quote_post_text_hint">Quote text</string>
+    <string name="create_quote_post_source_hint">Quote source</string>
+
+
+    <!-- TODO: Create text post strings -->
+    <string name="create_text_post_title_hint">Your title</string>
+    <string name="create_text_post_content_hint">Text here</string>
+
+
+    <string name="email_placeholder">someauthor@email.com</string>
 
 </resources>

@@ -63,7 +63,6 @@
                 android:id="@+id/password_photo"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
                 android:src="@drawable/password_50" />
 
             <com.wrapp.floatlabelededittext.FloatLabeledEditText
@@ -87,14 +86,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Login"/>
+            android:text="@string/sign_in"/>
 
         <Button
             android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Signup"/>
+            android:text="@string/sign_up"/>
 
     </LinearLayout>
 </RelativeLayout>

@@ -21,14 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="new post image"
+        android:contentDescription="@string/create_post_image_view_descrption"
         android:visibility="visible" />
 
     <EditText
         android:paddingTop="@dimen/edittext_vertical_margin"
         android:paddingBottom="@dimen/edittext_vertical_margin"
         android:id="@+id/image_description"
-        android:hint="Some comment about the image"
+        android:hint="@string/create_post_image_comment_view_hint"
         android:minHeight="100dp"
         android:gravity="top"
         fontPath="charter_regular.ttf"
