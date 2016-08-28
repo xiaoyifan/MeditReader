@@ -158,37 +158,6 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                final String userId = model.uid;
-                mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
-                        new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                User user = dataSnapshot.getValue(User.class);
-
-                                if (user == null){
-                                    Log.e(TAG, "User " + userId + " is unexpectedly null");
-                                    Toast.makeText(getContext(),
-                                            "Error: could not fetch user.",
-                                            Toast.LENGTH_SHORT).show();
-                                }else{
-
-                                    viewHolder.authorView.setText(user.username);
-                                    //viewHolder.authorAvatar;
-                                    Glide.with(getActivity())
-                                            .load(user.avatarUri)
-                                            .fitCenter()
-                                            .placeholder(R.drawable.ic_action_account_circle_40)
-                                            .into(viewHolder.authorAvatar);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                            }
-                        }
-                );
-
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
                     public void onClick(View startView) {
@@ -214,6 +183,39 @@ public abstract class PostListFragment extends Fragment {
                         .load(model.url)
                         .fitCenter()
                         .into(viewHolder.imageView);
+
+
+                final String userId = model.uid;
+                mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+
+                                if (user == null){
+                                    Log.e(TAG, "User " + userId + " is unexpectedly null");
+                                    Toast.makeText(getContext(),
+                                            "Error: could not fetch user.",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+
+                                    viewHolder.authorView.setText(user.username);
+                                    //viewHolder.authorAvatar;
+                                    Glide.with(getContext())
+                                            .load(user.avatarUri)
+                                            .fitCenter()
+                                            .placeholder(R.drawable.ic_action_account_circle_40)
+                                            .into(viewHolder.authorAvatar);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.w(TAG, "getUser:onCancelled", databaseError.toException());
+                            }
+                        }
+                );
+
             }
 
             public void populateLinkViewHolder(final PostLinkViewHolder viewHolder, final Post model, final int position){
