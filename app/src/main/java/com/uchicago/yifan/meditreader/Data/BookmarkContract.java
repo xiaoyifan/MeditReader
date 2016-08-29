@@ -14,7 +14,7 @@ public class BookmarkContract {
 
     public static final String PATH_BOOKMARK = "bookmark";
 
-    public static final class PostEntry implements BaseColumns{
+    public static final class BookmarkEntry implements BaseColumns{
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_BOOKMARK).build();
 
