@@ -501,14 +501,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     public void getImages(String code) {
-        imagePickerStatus = code;
-        Config config = new Config();
-        config.setSelectionMin(1);
-        config.setSelectionLimit(1);
-        ImagePickerActivity.setConfig(config);
-        Intent intent  = new Intent(this, ImagePickerActivity.class);
-        startActivityForResult(intent,INTENT_REQUEST_GET_IMAGES);
 
+        imagePickerStatus = code;
+
+        String[] perms = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.CAMERA"};
+
+        int permsRequestCode = 200;
+
+        requestPermissions(perms, permsRequestCode);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch(requestCode){
+
+            case 200:
+                Config config = new Config();
+                config.setSelectionMin(1);
+                config.setSelectionLimit(1);
+                ImagePickerActivity.setConfig(config);
+                Intent intent  = new Intent(this, ImagePickerActivity.class);
+                startActivityForResult(intent,INTENT_REQUEST_GET_IMAGES);;
+
+        }
     }
 
     @Override
