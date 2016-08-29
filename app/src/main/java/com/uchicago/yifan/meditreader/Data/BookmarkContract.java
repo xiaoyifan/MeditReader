@@ -1,6 +1,7 @@
 package com.uchicago.yifan.meditreader.Data;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -34,6 +35,13 @@ public class BookmarkContract {
 
         public static final String COLUMN_POST_TYPE = "post_type";
 
+        public static Uri buildBookmarkUri(long id){
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static String getBookmarkIDFromUri(Uri uri){
+            return uri.getPathSegments().get(1);
+        }
 
     }
 

@@ -28,7 +28,8 @@ public class BookmarkDbHelper extends SQLiteOpenHelper {
                 BookmarkContract.BookmarkEntry.COLUMN_URL + " TEXT NOT NULL," +
                 BookmarkContract.BookmarkEntry.COLUMN_DATE + " TEXT NOT NULL, " +
                 BookmarkContract.BookmarkEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
-                BookmarkContract.BookmarkEntry.COLUMN_POST_TYPE + " TEXT NOT NULL);";
+                BookmarkContract.BookmarkEntry.COLUMN_POST_TYPE + " TEXT NOT NULL, " +
+                "UNIQUE (" + BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " ) ON CONFLICT REPLACE)";
 
         sqLiteDatabase.execSQL(SQL_CREATE_BOOKMARK_TABLE);
 
