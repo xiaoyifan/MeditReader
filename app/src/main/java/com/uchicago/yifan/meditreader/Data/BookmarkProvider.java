@@ -2,7 +2,9 @@ package com.uchicago.yifan.meditreader.Data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
@@ -11,9 +13,48 @@ import android.support.annotation.Nullable;
  */
 public class BookmarkProvider extends ContentProvider {
 
+    private BookmarkDbHelper mOpenHelper;
+
+    static final int BOOKMARK = 100;
+    static final int BOOKMARK_WITH_ID = 101;
+
+    private static final SQLiteQueryBuilder sBookmarkByIDQueryBuilder;
+
+    static {
+        sBookmarkByIDQueryBuilder = new SQLiteQueryBuilder();
+        sBookmarkByIDQueryBuilder.setTables(BookmarkContract.BookmarkEntry.TABLE_NAME);
+    }
+
+    private static final String sBookmarkIDSelection = BookmarkContract.BookmarkEntry.TABLE_NAME +
+                                                        "." + BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " = ?";
+
+    static UriMatcher buildUriMatcher(){
+        final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
+        final String authority = BookmarkContract.CONTENT_AUTHORITY;
+
+        matcher.addURI(authority, BookmarkContract.PATH_BOOKMARK, BOOKMARK);
+        matcher.addURI(authority, BookmarkContract.PATH_BOOKMARK + "/#", BOOKMARK_WITH_ID);
+
+        return matcher;
+    }
+
+    private Cursor getBookmarkWithID(Uri uri, String[] projection, String sortOrder){
+        String post_id = BookmarkContract.BookmarkEntry.getBookmarkIDFromUri(uri);
+
+        return sBookmarkByIDQueryBuilder.query(mOpenHelper.getWritableDatabase(),
+                projection,
+                sBookmarkIDSelection,
+                new String[]{post_id},
+                null,
+                null,
+                sortOrder);
+
+    }
+
     @Override
     public boolean onCreate() {
-        return false;
+        mOpenHelper = new BookmarkDbHelper(getContext());
+        return true;
     }
 
     @Nullable
