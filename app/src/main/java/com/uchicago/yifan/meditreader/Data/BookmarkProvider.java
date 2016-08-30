@@ -1,12 +1,15 @@
 package com.uchicago.yifan.meditreader.Data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Yifan on 8/28/16.
@@ -67,7 +70,7 @@ public class BookmarkProvider extends ContentProvider {
 
         switch (sUriMatcher.match(uri)){
             case BOOKMARK: {
-                retCursor = mOpenHelper.getReadableDatabase().query(BookmarkContract.BookmarkEntry.TABLE_NAME, projection, selection, selectArgs, null, null, sortOrder);
+                retCursor = mOpenHelper.getWritableDatabase().query(BookmarkContract.BookmarkEntry.TABLE_NAME, projection, selection, selectArgs, null, null, sortOrder);
                 break;
             }
             case BOOKMARK_WITH_ID:{
@@ -101,16 +104,87 @@ public class BookmarkProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        return null;
+
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        Uri returnUri;
+
+        switch (sUriMatcher.match(uri)){
+            case BOOKMARK:{
+                long _id = db.insert(BookmarkContract.BookmarkEntry.TABLE_NAME, null, contentValues);
+                if (_id > 0){
+                    returnUri = BookmarkContract.BookmarkEntry.buildBookmarkUri(_id);
+                }
+                else {
+                    throw new android.database.SQLException("Failed to inset row into BOOKMARK TABLE: " + uri);
+                }
+                break;
+            }
+            default:
+                throw new android.database.SQLException("Failed to insert row into " + uri);
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnUri;
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        int rowsDeleted;
+
+        if (selection == null) selection = "1";
+        switch (sUriMatcher.match(uri))
+        {
+            case BOOKMARK:{
+                rowsDeleted = db.delete(
+                        BookmarkContract.BookmarkEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            }
+            case BOOKMARK_WITH_ID:{
+                rowsDeleted = db.delete(BookmarkContract.BookmarkEntry.TABLE_NAME,
+                        BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " = ?", new String[]{String.valueOf(ContentUris.parseId(uri))});
+
+                Log.d("DELETE: ", "bookmark " + String.valueOf(ContentUris.parseId(uri)) + " is deleted.");
+
+                int fav = getContext().getContentResolver().query(
+                        BookmarkContract.BookmarkEntry.CONTENT_URI,
+                        null, null, null, null).getCount();
+
+                Log.d("SUM: ", "There're " + fav + " movies.");
+
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (rowsDeleted != 0)
+        {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+        int rowsUpdated;
+
+        switch (sUriMatcher.match(uri)) {
+            case BOOKMARK:
+                rowsUpdated = db.update(BookmarkContract.BookmarkEntry.TABLE_NAME, contentValues, selection,
+                        selectionArgs);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsUpdated;
+
     }
 }
