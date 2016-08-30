@@ -15,6 +15,8 @@ public class BookmarkProvider extends ContentProvider {
 
     private BookmarkDbHelper mOpenHelper;
 
+    private static final UriMatcher sUriMatcher = buildUriMatcher();
+
     static final int BOOKMARK = 100;
     static final int BOOKMARK_WITH_ID = 101;
 
@@ -59,14 +61,41 @@ public class BookmarkProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
-        return null;
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectArgs, String sortOrder) {
+
+        Cursor retCursor;
+
+        switch (sUriMatcher.match(uri)){
+            case BOOKMARK: {
+                retCursor = mOpenHelper.getReadableDatabase().query(BookmarkContract.BookmarkEntry.TABLE_NAME, projection, selection, selectArgs, null, null, sortOrder);
+                break;
+            }
+            case BOOKMARK_WITH_ID:{
+                retCursor = getBookmarkWithID(uri, projection, sortOrder);
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown Uri: " + uri);
+        }
+
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        return retCursor;
     }
 
     @Nullable
     @Override
     public String getType(Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+
+        switch (match){
+            case BOOKMARK:
+                return BookmarkContract.BookmarkEntry.CONTENT_TYPE;
+            case BOOKMARK_WITH_ID:
+                return BookmarkContract.BookmarkEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new UnsupportedOperationException("Unknown Uri: " + uri);
+        }
     }
 
     @Nullable
