@@ -24,6 +24,30 @@ public class Post {
     public int starCount = 0;
     public Map<String, Boolean> stars = new HashMap<>();
 
+    public String getUid() {
+        return uid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPost_type() {
+        return post_type;
+    }
+
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
