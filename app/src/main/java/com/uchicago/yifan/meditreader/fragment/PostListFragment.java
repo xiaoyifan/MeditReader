@@ -444,7 +444,7 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        
+
                     }
                 });
             }

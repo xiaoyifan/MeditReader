@@ -24,10 +24,10 @@ public class BookmarkDbHelper extends SQLiteOpenHelper {
                 BookmarkContract.BookmarkEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " TEXT NOT NULL, " +
                 BookmarkContract.BookmarkEntry.COLUMN_USER_ID + " TEXT NOT NULL, " +
-                BookmarkContract.BookmarkEntry.COLUMN_TITLE + " TEXT NOT NULL, " +
-                BookmarkContract.BookmarkEntry.COLUMN_URL + " TEXT NOT NULL," +
+                BookmarkContract.BookmarkEntry.COLUMN_TITLE + " TEXT, " +
+                BookmarkContract.BookmarkEntry.COLUMN_URL + " TEXT," +
                 BookmarkContract.BookmarkEntry.COLUMN_DATE + " TEXT NOT NULL, " +
-                BookmarkContract.BookmarkEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
+                BookmarkContract.BookmarkEntry.COLUMN_DESCRIPTION + " TEXT, " +
                 BookmarkContract.BookmarkEntry.COLUMN_POST_TYPE + " TEXT NOT NULL, " +
                 "UNIQUE (" + BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " ) ON CONFLICT REPLACE)";
 
