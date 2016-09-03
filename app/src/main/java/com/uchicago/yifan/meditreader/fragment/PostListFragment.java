@@ -174,6 +174,11 @@ public abstract class PostListFragment extends Fragment {
                         intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);
                     }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
                 });
 
                 Glide.with(getActivity())
@@ -286,6 +291,11 @@ public abstract class PostListFragment extends Fragment {
                         intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);
                     }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
                 });
             }
 
@@ -350,6 +360,11 @@ public abstract class PostListFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), PostDetailActivity.class);
                         intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
                     }
                 });
             }
@@ -425,6 +440,11 @@ public abstract class PostListFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), PostDetailActivity.class);
                         intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        
                     }
                 });
             }
