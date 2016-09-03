@@ -157,7 +157,7 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                final int fav = getContext().getContentResolver().query(
+                int fav = getContext().getContentResolver().query(
                         BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                         null, null, null, null).getCount();
 
@@ -190,11 +190,17 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        int fav = getContext().getContentResolver().query(
+                                BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                                null, null, null, null).getCount();
                         if (fav > 0){
                             setPostMarked(model, postKey, false);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
                         }
                         else {
                             setPostMarked(model, postKey, true);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                         }
                     }
                 });
@@ -259,7 +265,7 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                final int fav = getContext().getContentResolver().query(
+                int fav = getContext().getContentResolver().query(
                         BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                         null, null, null, null).getCount();
 
@@ -323,11 +329,18 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        int fav = getContext().getContentResolver().query(
+                                BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                                null, null, null, null).getCount();
+
                         if (fav > 0){
                             setPostMarked(model, postKey, false);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
                         }
                         else {
                             setPostMarked(model, postKey, true);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                         }
                     }
                 });
@@ -345,7 +358,7 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                final int fav = getContext().getContentResolver().query(
+                int fav = getContext().getContentResolver().query(
                         BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                         null, null, null, null).getCount();
 
@@ -409,11 +422,18 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        int fav = getContext().getContentResolver().query(
+                                BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                                null, null, null, null).getCount();
+
                         if (fav > 0){
                             setPostMarked(model, postKey, false);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
                         }
                         else {
                             setPostMarked(model, postKey, true);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                         }
                     }
                 });
@@ -441,7 +461,7 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                final int fav = getContext().getContentResolver().query(
+                int fav = getContext().getContentResolver().query(
                         BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                         null, null, null, null).getCount();
 
@@ -505,11 +525,17 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        int fav = getContext().getContentResolver().query(
+                                BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                                null, null, null, null).getCount();
                         if (fav > 0){
                             setPostMarked(model, postKey, false);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
                         }
                         else {
                             setPostMarked(model, postKey, true);
+                            viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                         }
                     }
                 });

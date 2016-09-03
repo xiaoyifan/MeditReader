@@ -1,7 +1,6 @@
 package com.uchicago.yifan.meditreader.Data;
 
 import android.content.ContentProvider;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -142,9 +141,9 @@ public class BookmarkProvider extends ContentProvider {
             }
             case BOOKMARK_WITH_ID:{
                 rowsDeleted = db.delete(BookmarkContract.BookmarkEntry.TABLE_NAME,
-                        BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " = ?", new String[]{String.valueOf(ContentUris.parseId(uri))});
+                        BookmarkContract.BookmarkEntry.COLUMN_POST_ID + " = ?", new String[]{BookmarkContract.BookmarkEntry.getBookmarkIDFromUri(uri)});
 
-                Log.d("DELETE: ", "bookmark " + String.valueOf(ContentUris.parseId(uri)) + " is deleted.");
+                Log.d("DELETE: ", "bookmark " + BookmarkContract.BookmarkEntry.getBookmarkIDFromUri(uri) + " is deleted.");
 
                 int fav = getContext().getContentResolver().query(
                         BookmarkContract.BookmarkEntry.CONTENT_URI,
