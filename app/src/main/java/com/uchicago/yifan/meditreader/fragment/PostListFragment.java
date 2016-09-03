@@ -1,6 +1,7 @@
 package com.uchicago.yifan.meditreader.fragment;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Activities.PostDetailActivity;
+import com.uchicago.yifan.meditreader.Data.BookmarkContract;
 import com.uchicago.yifan.meditreader.Model.Post;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
@@ -155,6 +157,17 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
+                final int fav = getContext().getContentResolver().query(
+                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                        null, null, null, null).getCount();
+
+                if (fav > 0){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                }
+
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
                     public void onClick(View startView) {
@@ -177,7 +190,12 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (fav > 0){
+                            setPostMarked(model, postKey, false);
+                        }
+                        else {
+                            setPostMarked(model, postKey, true);
+                        }
                     }
                 });
 
@@ -241,6 +259,17 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
+                final int fav = getContext().getContentResolver().query(
+                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                        null, null, null, null).getCount();
+
+                if (fav > 0){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                }
+
                 final String userId = model.uid;
                 mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
                         new ValueEventListener() {
@@ -294,7 +323,12 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (fav > 0){
+                            setPostMarked(model, postKey, false);
+                        }
+                        else {
+                            setPostMarked(model, postKey, true);
+                        }
                     }
                 });
             }
@@ -311,6 +345,17 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
+                final int fav = getContext().getContentResolver().query(
+                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                        null, null, null, null).getCount();
+
+                if (fav > 0){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                }
+
                 final String userId = model.uid;
                 mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
                         new ValueEventListener() {
@@ -364,7 +409,12 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (fav > 0){
+                            setPostMarked(model, postKey, false);
+                        }
+                        else {
+                            setPostMarked(model, postKey, true);
+                        }
                     }
                 });
             }
@@ -391,6 +441,17 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
+                final int fav = getContext().getContentResolver().query(
+                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                        null, null, null, null).getCount();
+
+                if (fav > 0){
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                }
+                else {
+                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                }
+
                 final String userId = model.uid;
                 mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
                         new ValueEventListener() {
@@ -444,7 +505,12 @@ public abstract class PostListFragment extends Fragment {
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        if (fav > 0){
+                            setPostMarked(model, postKey, false);
+                        }
+                        else {
+                            setPostMarked(model, postKey, true);
+                        }
                     }
                 });
             }
@@ -454,6 +520,25 @@ public abstract class PostListFragment extends Fragment {
 
 
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void setPostMarked(Post post, String key, boolean favored){
+
+        if (favored){
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_POST_ID, key);
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_USER_ID, post.getUid());
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_TITLE, post.getTitle());
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_URL, post.getUrl());
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_DATE, post.getDate());
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_DESCRIPTION, post.getDescription());
+            contentValues.put(BookmarkContract.BookmarkEntry.COLUMN_POST_TYPE, post.getPost_type());
+            getContext().getContentResolver().insert(BookmarkContract.BookmarkEntry.CONTENT_URI, contentValues);
+        }
+        else {
+            getContext().getContentResolver().delete(BookmarkContract.BookmarkEntry.buildBookmarkUri(key), null, null);
+        }
     }
 
     private void onStarClicked(DatabaseReference postRef) {

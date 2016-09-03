@@ -38,7 +38,7 @@ public class BookmarkProvider extends ContentProvider {
         final String authority = BookmarkContract.CONTENT_AUTHORITY;
 
         matcher.addURI(authority, BookmarkContract.PATH_BOOKMARK, BOOKMARK);
-        matcher.addURI(authority, BookmarkContract.PATH_BOOKMARK + "/#", BOOKMARK_WITH_ID);
+        matcher.addURI(authority, BookmarkContract.PATH_BOOKMARK + "/*", BOOKMARK_WITH_ID);
 
         return matcher;
     }
@@ -112,7 +112,7 @@ public class BookmarkProvider extends ContentProvider {
             case BOOKMARK:{
                 long _id = db.insert(BookmarkContract.BookmarkEntry.TABLE_NAME, null, contentValues);
                 if (_id > 0){
-                    returnUri = BookmarkContract.BookmarkEntry.buildBookmarkUri(_id);
+                    returnUri = BookmarkContract.BookmarkEntry.CONTENT_URI;
                 }
                 else {
                     throw new android.database.SQLException("Failed to inset row into BOOKMARK TABLE: " + uri);
