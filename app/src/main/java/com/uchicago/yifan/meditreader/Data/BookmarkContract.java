@@ -1,7 +1,6 @@
 package com.uchicago.yifan.meditreader.Data;
 
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -25,18 +24,16 @@ public class BookmarkContract {
         public static final String TABLE_NAME = "bookmark";
 
         public static final String COLUMN_POST_ID = "post_id";
-
         public static final String COLUMN_USER_ID = "uid";
         public static final String COLUMN_TITLE = "title";
-
         public static final String COLUMN_URL = "url";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_DESCRIPTION = "description";
-
         public static final String COLUMN_POST_TYPE = "post_type";
 
-        public static Uri buildBookmarkUri(long id){
-            return ContentUris.withAppendedId(CONTENT_URI, id);
+        public static Uri buildBookmarkUri(String post_id){
+            Uri uri = CONTENT_URI.buildUpon().appendPath(post_id).build();
+            return CONTENT_URI.buildUpon().appendPath(post_id).build();
         }
 
         public static String getBookmarkIDFromUri(Uri uri){
