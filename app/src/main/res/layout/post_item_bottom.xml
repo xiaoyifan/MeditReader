@@ -13,8 +13,8 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_alignParentLeft="true"
-        android:layout_alignBottom="@+id/comment_bookmark_layout"
-        android:layout_alignTop="@+id/comment_bookmark_layout">
+        android:layout_alignBottom="@+id/comment_layout"
+        android:layout_alignTop="@+id/comment_layout">
 
         <ImageView
             android:id="@+id/heart"
@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/comment_bookmark_layout"
+        android:id="@+id/comment_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -56,7 +56,7 @@
             tools:text="responses 7" />
 
         <ImageView
-            android:id="@+id/bookmark"
+            android:id="@+id/show_comment_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"

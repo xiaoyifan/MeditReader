@@ -18,7 +18,7 @@ public class PostTextViewHolder extends RecyclerView.ViewHolder{
     public TextView dateView;
     public ImageView starView;
     public TextView numStarsView;
-    public ImageView bookmarkView;
+    public ImageView commentView;
     public TextView numCommentView;
     public TextView titleView;
     public TextView bodyView;
@@ -31,13 +31,13 @@ public class PostTextViewHolder extends RecyclerView.ViewHolder{
         authorView = (TextView) itemView.findViewById(R.id.post_author);
         starView = (ImageView) itemView.findViewById(R.id.heart);
         numStarsView = (TextView) itemView.findViewById(R.id.post_num_stars);
-        bookmarkView = (ImageView)itemView.findViewById(R.id.bookmark);
+        commentView = (ImageView)itemView.findViewById(R.id.show_comment_button);
         numCommentView = (TextView)itemView.findViewById(R.id.post_num_comment);
         titleView = (TextView)itemView.findViewById(R.id.text_title);
         bodyView = (TextView) itemView.findViewById(R.id.text_body);
     }
 
-    public void bindToPost(Post post, View.OnClickListener starClickListener, View.OnClickListener bookmarkClickListener) {
+    public void bindToPost(Post post, View.OnClickListener starClickListener, View.OnClickListener commentClickListener) {
         //authorView.setText(post.author);
         dateView.setText(post.date);
         numStarsView.setText(String.valueOf(post.starCount));
@@ -46,6 +46,6 @@ public class PostTextViewHolder extends RecyclerView.ViewHolder{
         bodyView.setText(post.description);
 
         starView.setOnClickListener(starClickListener);
-        bookmarkView.setOnClickListener(bookmarkClickListener);
+        commentView.setOnClickListener(commentClickListener);
     }
 }

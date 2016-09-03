@@ -34,9 +34,6 @@ import com.uchicago.yifan.meditreader.ViewHolder.PostLinkViewHolder;
 import com.uchicago.yifan.meditreader.ViewHolder.PostQuoteViewHolder;
 import com.uchicago.yifan.meditreader.ViewHolder.PostTextViewHolder;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -471,39 +468,6 @@ public abstract class PostListFragment extends Fragment {
             }
         });
     }
-
-
-    public void updateBookmarkForUser(final DatabaseReference userBookmarkRef, final Post model, final String key){
-
-
-        userBookmarkRef.child(key).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Post existedPost = dataSnapshot.getValue(Post.class);
-
-                        //if the post is not bookmarked yet, add it to the user bookmark
-                        if (existedPost == null){
-
-                            Map<String, Object> postValues = model.toMap();
-                            Map<String, Object> childUpdates = new HashMap<>();
-                            childUpdates.put( "/" + key, postValues);
-
-                            userBookmarkRef.updateChildren(childUpdates);
-                        }else{
-                            dataSnapshot.getRef().setValue(null);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "getUser:onCancelled", databaseError.toException());
-                    }
-                }
-        );
-
-    }
-
 
 
     @Override
