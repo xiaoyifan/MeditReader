@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.fragment.BookmarkFragment;
 
 /**
@@ -19,8 +26,11 @@ import com.uchicago.yifan.meditreader.fragment.BookmarkFragment;
  */
 public class BookmarkAdapter extends CursorAdapter {
 
+    private DatabaseReference mDatabase;
+
     public BookmarkAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -49,6 +59,34 @@ public class BookmarkAdapter extends CursorAdapter {
         TextView dateView = (TextView) view.findViewById(R.id.post_date);
         dateView.setText(cursor.getString(BookmarkFragment.COL_DATE));
 
+        final TextView postAuthorView = (TextView)view.findViewById(R.id.post_author);
+        final ImageView authorAvatarView = (ImageView)view.findViewById(R.id.post_author_photo);
+
+        final String userId = cursor.getString(BookmarkFragment.COL_USER_ID);
+        mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+
+                        if (user == null){
+                            postAuthorView.setText("Unidentified user");
+                        }else{
+                            postAuthorView.setText(user.username);
+                            Glide.with(context)
+                                    .load(user.avatarUri)
+                                    .fitCenter()
+                                    .placeholder(R.drawable.ic_action_account_circle_40)
+                                    .into(authorAvatarView);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("BOOKMARK: ", "getUser:onCancelled", databaseError.toException());
+                    }
+                }
+        );
 
 
         switch (post_type){

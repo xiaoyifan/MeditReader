@@ -476,6 +476,7 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
+
                 if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(model.getUid())){
                     viewHolder.bookmarkView.setVisibility(View.INVISIBLE);
                 }
