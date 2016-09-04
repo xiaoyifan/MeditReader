@@ -20,8 +20,8 @@ public class CreateTextPostActivity extends CreatePostActivity {
     void writeNewPost(String userId) {
 
         String key = mDatabase.child("posts").push().getKey();
-        EditText TextTitle = (EditText) findViewById(R.id.text_title);
-        EditText TextContent = (EditText) findViewById(R.id.text_content);
+        EditText TextTitle = (EditText) findViewById(R.id.create_text_title);
+        EditText TextContent = (EditText) findViewById(R.id.create_text_content);
         Post post = new Post(userId, "TEXT", TextTitle.getText().toString(), TextContent.getText().toString());
 
         Map<String, Object> postValues = post.toMap();

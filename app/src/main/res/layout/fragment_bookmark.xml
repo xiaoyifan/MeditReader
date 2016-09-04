@@ -4,10 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.uchicago.yifan.meditreader.fragment.BookmarkFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/bookmark_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_alignParentTop="true"
+        android:clipToPadding="false"
+        android:padding="5dp"
+        android:scrollbars="vertical" />
 
 </FrameLayout>

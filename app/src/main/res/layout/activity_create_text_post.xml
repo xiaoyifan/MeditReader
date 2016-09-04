@@ -18,7 +18,7 @@
 
         <EditText xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/text_title"
+            android:id="@+id/create_text_title"
             android:layout_width="match_parent"
             android:paddingTop="@dimen/edittext_vertical_margin"
             android:paddingBottom="@dimen/edittext_vertical_margin"
@@ -37,7 +37,7 @@
             android:paddingTop="@dimen/edittext_vertical_margin"
             android:paddingBottom="@dimen/edittext_vertical_margin"
             fontPath="charter_regular.ttf"
-            android:id="@+id/text_content"
+            android:id="@+id/create_text_content"
             android:hint="@string/create_text_post_content_hint"
             android:minHeight="100dp"
             android:gravity="top"
