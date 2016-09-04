@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uchicago.yifan.meditreader.Data.BookmarkContract;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.fragment.BookmarkFragment;
 
@@ -88,7 +89,16 @@ public class BookmarkAdapter extends CursorAdapter {
                 }
         );
 
+        final String postId = cursor.getString(BookmarkFragment.COL_POST_ID);
 
+        ImageView bookmarkView = (ImageView) view.findViewById(R.id.bookmark_button);
+        bookmarkView.setImageResource(R.drawable.trash_48);
+        bookmarkView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.getContentResolver().delete(BookmarkContract.BookmarkEntry.buildBookmarkUri(postId), null, null);
+            }
+        });
         switch (post_type){
             case "IMAGE":
             {
