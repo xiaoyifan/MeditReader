@@ -14,6 +14,7 @@
     <color name="teal_500">#009688</color>
     <color name="green_500">#4CAF50</color>
     <color name="light_green_500">#8BC34A</color>
+    <color name="light_gray">#f0f0f0</color>
 
     <color name="tumblr_primary">#36465D</color>
     <color name="tumblr_orange">#F2992E</color>
