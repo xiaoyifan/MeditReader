@@ -164,7 +164,7 @@ public abstract class PostListFragment extends Fragment {
                     int fav = getContext().getContentResolver().query(
                             BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                             null, null, null, null).getCount();
-
+                    viewHolder.bookmarkView.setVisibility(View.VISIBLE);
                     if (fav > 0){
                         viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                     }
@@ -277,7 +277,7 @@ public abstract class PostListFragment extends Fragment {
                     int fav = getContext().getContentResolver().query(
                             BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                             null, null, null, null).getCount();
-
+                    viewHolder.bookmarkView.setVisibility(View.VISIBLE);
                     if (fav > 0){
                         viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                     }
@@ -375,7 +375,7 @@ public abstract class PostListFragment extends Fragment {
                     int fav = getContext().getContentResolver().query(
                             BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                             null, null, null, null).getCount();
-
+                    viewHolder.bookmarkView.setVisibility(View.VISIBLE);
                     if (fav > 0){
                         viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                     }
@@ -484,7 +484,7 @@ public abstract class PostListFragment extends Fragment {
                     int fav = getContext().getContentResolver().query(
                             BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
                             null, null, null, null).getCount();
-
+                    viewHolder.bookmarkView.setVisibility(View.VISIBLE);
                     if (fav > 0){
                         viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
                     }
