@@ -2,12 +2,11 @@ package com.uchicago.yifan.meditreader.Activities;
 
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.uchicago.yifan.meditreader.R;
 import com.uchicago.yifan.meditreader.fragment.BookmarkFragment;
 
-public class BookmarkActivity extends AppCompatActivity {
+public class BookmarkActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

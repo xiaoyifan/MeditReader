@@ -113,9 +113,11 @@ public class BookmarkAdapter extends CursorAdapter {
             }
             case "QUOTE":
             {
-                TextView quoteTextView = (TextView)view.findViewById(R.id.quote_text);
+                TextView quoteTextView = (TextView)view.findViewById(R.id.quote_text_view);
+
                 quoteTextView.setText(cursor.getString(BookmarkFragment.COL_TITLE));
-                TextView quoteSourceView = (TextView)view.findViewById(R.id.quote_source);
+                TextView quoteSourceView = (TextView)view.findViewById(R.id.quote_source_view);
+
                 quoteSourceView.setText(cursor.getString(BookmarkFragment.COL_DESCRIPTION));
                 break;
             }
