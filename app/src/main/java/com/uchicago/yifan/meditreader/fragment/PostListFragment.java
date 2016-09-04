@@ -157,15 +157,20 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                int fav = getContext().getContentResolver().query(
-                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
-                        null, null, null, null).getCount();
-
-                if (fav > 0){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(model.getUid())){
+                    viewHolder.bookmarkView.setVisibility(View.INVISIBLE);
                 }
                 else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    int fav = getContext().getContentResolver().query(
+                            BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                            null, null, null, null).getCount();
+
+                    if (fav > 0){
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                    }
+                    else {
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    }
                 }
 
                 viewHolder.bindToPost(model, new View.OnClickListener() {
@@ -265,15 +270,20 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                int fav = getContext().getContentResolver().query(
-                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
-                        null, null, null, null).getCount();
-
-                if (fav > 0){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(model.getUid())){
+                    viewHolder.bookmarkView.setVisibility(View.INVISIBLE);
                 }
                 else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    int fav = getContext().getContentResolver().query(
+                            BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                            null, null, null, null).getCount();
+
+                    if (fav > 0){
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                    }
+                    else {
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    }
                 }
 
                 final String userId = model.uid;
@@ -358,15 +368,20 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                int fav = getContext().getContentResolver().query(
-                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
-                        null, null, null, null).getCount();
-
-                if (fav > 0){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(model.getUid())){
+                    viewHolder.bookmarkView.setVisibility(View.INVISIBLE);
                 }
                 else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    int fav = getContext().getContentResolver().query(
+                            BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                            null, null, null, null).getCount();
+
+                    if (fav > 0){
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                    }
+                    else {
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    }
                 }
 
                 final String userId = model.uid;
@@ -461,15 +476,20 @@ public abstract class PostListFragment extends Fragment {
                     viewHolder.starView.setImageResource(R.drawable.like_48);
                 }
 
-                int fav = getContext().getContentResolver().query(
-                        BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
-                        null, null, null, null).getCount();
-
-                if (fav > 0){
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(model.getUid())){
+                    viewHolder.bookmarkView.setVisibility(View.INVISIBLE);
                 }
                 else {
-                    viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    int fav = getContext().getContentResolver().query(
+                            BookmarkContract.BookmarkEntry.buildBookmarkUri(postKey),
+                            null, null, null, null).getCount();
+
+                    if (fav > 0){
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_filled_50);
+                    }
+                    else {
+                        viewHolder.bookmarkView.setImageResource(R.drawable.pin_50);
+                    }
                 }
 
                 final String userId = model.uid;
