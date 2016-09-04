@@ -191,6 +191,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         switch ((int) drawerItem.getIdentifier())
                         {
                             case 2:
+                                startActivity(new Intent(getBaseContext(), BookmarkActivity.class));
                                 break;
                             case 3:
                                 FirebaseAuth.getInstance().signOut();
