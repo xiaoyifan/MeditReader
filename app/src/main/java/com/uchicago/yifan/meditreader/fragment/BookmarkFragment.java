@@ -50,6 +50,8 @@ public class BookmarkFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        adapter = new BookmarkAdapter(getActivity(), null, 0);
+
         return inflater.inflate(R.layout.fragment_bookmark, container, false);
     }
 
