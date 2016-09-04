@@ -63,6 +63,7 @@ public class BookmarkAdapter extends CursorAdapter {
                         .load(url)
                         .fitCenter()
                         .into(imageView);
+                break;
             }
             case "TEXT":
             {
@@ -70,6 +71,7 @@ public class BookmarkAdapter extends CursorAdapter {
                 textView.setText(cursor.getString(BookmarkFragment.COL_TITLE));
                 TextView contentView = (TextView)view.findViewById(R.id.text_body);
                 contentView.setText(cursor.getString(BookmarkFragment.COL_DESCRIPTION));
+                break;
             }
             case "QUOTE":
             {
@@ -77,6 +79,7 @@ public class BookmarkAdapter extends CursorAdapter {
                 quoteTextView.setText(cursor.getString(BookmarkFragment.COL_TITLE));
                 TextView quoteSourceView = (TextView)view.findViewById(R.id.quote_source);
                 quoteSourceView.setText(cursor.getString(BookmarkFragment.COL_DESCRIPTION));
+                break;
             }
             case "LINK":
             {
@@ -93,6 +96,7 @@ public class BookmarkAdapter extends CursorAdapter {
                         context.startActivity(intent);
                     }
                 });
+                break;
             }
         }
     }

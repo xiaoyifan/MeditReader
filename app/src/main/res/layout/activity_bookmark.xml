@@ -9,14 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.uchicago.yifan.meditreader.Activities.BookmarkActivity">
 
-    <fragment
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bookmark_fragement_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_bookmark"
-        android:name="com.uchicago.yifan.meditreader.fragment.BookmarkFragment"
-        android:layout="@layout/fragment_bookmark" />
+        tools:context="com.uchicago.yifan.meditreader.Activities.BookmarkActivity"
+        tools:ignore="MergeRootFrame" />
 
 </RelativeLayout>
