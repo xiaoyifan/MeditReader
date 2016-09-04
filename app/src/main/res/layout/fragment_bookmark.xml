@@ -11,6 +11,8 @@
         android:layout_alignParentTop="true"
         android:clipToPadding="false"
         android:padding="5dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
         android:scrollbars="vertical" />
 
 </FrameLayout>
