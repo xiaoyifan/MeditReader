@@ -509,8 +509,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         String[] perms = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.CAMERA"};
 
         int permsRequestCode = 200;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(perms, permsRequestCode);
+        }
 
-        requestPermissions(perms, permsRequestCode);
 
     }
 
