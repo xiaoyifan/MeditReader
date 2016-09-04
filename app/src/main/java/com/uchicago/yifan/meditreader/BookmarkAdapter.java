@@ -22,6 +22,8 @@ import com.uchicago.yifan.meditreader.Data.BookmarkContract;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.fragment.BookmarkFragment;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by Yifan on 8/30/16.
  */
@@ -96,7 +98,20 @@ public class BookmarkAdapter extends CursorAdapter {
         bookmarkView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.getContentResolver().delete(BookmarkContract.BookmarkEntry.buildBookmarkUri(postId), null, null);
+
+                new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Remove this bookmark?")
+                        .setConfirmText("Sure")
+                        .setCancelText("Cancel")
+                        .showCancelButton(true)
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                context.getContentResolver().delete(BookmarkContract.BookmarkEntry.buildBookmarkUri(postId), null, null);
+                                sDialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
         switch (post_type){
