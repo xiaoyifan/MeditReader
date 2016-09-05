@@ -11,6 +11,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs{
+        config{
+            keyAlias 'xiaoyifankey'
+            keyPassword '920127xyf'
+            storeFile file('/Users/Yifan/Desktop/meditreaderkeystore.jks')
+            storePassword '920127xyf'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
