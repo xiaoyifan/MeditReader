@@ -15,12 +15,13 @@ android {
         config{
             keyAlias 'xiaoyifankey'
             keyPassword '920127xyf'
-            storeFile file('/Users/Yifan/Desktop/meditreaderkeystore.jks')
+            storeFile file('meditreaderkeystore.jks')
             storePassword '920127xyf'
         }
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
