@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -24,55 +23,34 @@ import com.google.firebase.database.ValueEventListener;
 import com.uchicago.yifan.meditreader.Model.User;
 import com.uchicago.yifan.meditreader.R;
 
-public class SignInActivity extends BaseActivity implements View.OnClickListener{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
+
+public class SignInActivity extends BaseActivity{
 
     private static final String TAG = "SignInActivity";
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
-    private EditText mEmailField;
-    private EditText mPasswordField;
-    private Button mSignInButton;
+    @BindView(R.id.email_text) EditText mEmailField;
+    @BindView(R.id.password_text) EditText mPasswordField;
+    @BindView(R.id.login_button) Button mSignInButton;
+    @BindView(R.id.switch_newuser) CompoundButton newUserCheckbox;
 
-    private CompoundButton newUserCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
+        ButterKnife.bind(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        // Views
-        mEmailField = (EditText) findViewById(R.id.email_text);
-        mPasswordField = (EditText) findViewById(R.id.password_text);
-        mSignInButton = (Button) findViewById(R.id.login_button);
-
         newUserCheckbox = (CompoundButton)findViewById(R.id.switch_newuser);
         newUserCheckbox.setChecked(false);
-        newUserCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked){
-                    mSignInButton.setText(R.string.sign_up);
-                }
-                else {
-                    mSignInButton.setText(R.string.sign_in);
-                }
-            }
-        });
-        mSignInButton.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.login_button:
-                loginButtonTapped();
-                break;
-        }
     }
 
     @Override
@@ -84,14 +62,24 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
 
     }
 
-
-    private void loginButtonTapped(){
+    @OnClick(R.id.login_button)
+    void loginButtonTapped(){
 
         if (newUserCheckbox.isChecked()){
             signup();
         }
         else{
             login();
+        }
+    }
+
+    @OnCheckedChanged(R.id.switch_newuser)
+    void checked(boolean isChecked){
+        if (isChecked){
+            mSignInButton.setText(R.string.sign_up);
+        }
+        else {
+            mSignInButton.setText(R.string.sign_in);
         }
     }
 
