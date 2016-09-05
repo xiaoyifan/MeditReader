@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +21,12 @@ import com.uchicago.yifan.meditreader.R;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostDetailActivity extends BaseActivity implements View.OnClickListener{
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTextChanged;
+
+public class PostDetailActivity extends BaseActivity{
 
     private static final String TAG = "PostDetailActivity";
 
@@ -33,20 +36,21 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private String mPostKey;
 
     private CommentAdapter mAdapter;
-    private RecyclerView recyclerView;
-
-
-    private EditText commentInputView;
-    private Button commentPostButton;
 
     public static final String EXTRA_POST_KEY = "post_key";
+
+    @BindView(R.id.comment_post_button) Button commentPostButton;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.comment_list) RecyclerView recyclerView;
+    @BindView(R.id.comment_input_view) EditText commentInputView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
+        ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -71,34 +75,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
                 .child("post-comments").child(mPostKey);
 
-        commentPostButton = (Button)findViewById(R.id.comment_post_button);
-        commentPostButton.setOnClickListener(this);
-        commentInputView = (EditText)findViewById(R.id.comment_input_view);
-
-        commentInputView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() != 0)
-                {
-                    commentPostButton.setEnabled(true);
-                }
-                else {
-                    commentPostButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        recyclerView = (RecyclerView)findViewById(R.id.comment_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -111,6 +87,18 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         recyclerView.setAdapter(mAdapter);
     }
 
+
+    @OnTextChanged(R.id.comment_input_view)
+    public void textChanged (CharSequence text) {
+        if (text.length() != 0)
+        {
+            commentPostButton.setEnabled(true);
+        }
+        else {
+            commentPostButton.setEnabled(false);
+        }
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -118,16 +106,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mAdapter.cleanupListener();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.comment_post_button:
-                postComment();
-                break;
-        }
-    }
-
-    private void postComment() {
+    @OnClick(R.id.comment_post_button)
+    void postComment() {
         final String uid = getUid();
         FirebaseDatabase.getInstance().getReference().child("users").child(uid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
