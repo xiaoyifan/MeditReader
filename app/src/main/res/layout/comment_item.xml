@@ -9,8 +9,8 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/comment_avatar_id"
         android:padding="5dp"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/user_avatar_imgaeview_size"
+        android:layout_height="@dimen/user_avatar_imgaeview_size"
         android:src="@drawable/ic_action_account_circle_40" />
 
     <LinearLayout

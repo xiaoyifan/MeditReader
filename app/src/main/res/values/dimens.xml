@@ -6,6 +6,8 @@
     <dimen name="edittext_horizontal_margin">8dp</dimen>
     <dimen name="text_view_top_padding">5dp</dimen>
 
+    <dimen name="user_avatar_imgaeview_size">55dp</dimen>
+
     <dimen name="layout_radius_large">192dp</dimen>
     <dimen name="layout_radius_medium">168dp</dimen>
     <dimen name="layout_radius_small">144dp</dimen>
