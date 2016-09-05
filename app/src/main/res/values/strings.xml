@@ -26,25 +26,58 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
 
-    <!-- TODO: Create post strings -->
-    <string name="create_post_image_view_descrption">new post image</string>
+
+    <string name="toolbar">tool bar</string>
+
+    <string name="new_post_button">new post button</string>
+
+    <!-- Sign in strings -->
+    <string name="email_field_description">login email</string>
+    <string name="password_field_description">login password</string>
+    <string name="new_user_checkbox">New user checkbox</string>
+    <string name="login_button_description">Login button</string>
+
+    <!-- New post strings -->
+    <string name="new_link_post">new link post</string>
+    <string name="new_quote_post">new quote post</string>
+    <string name="new_text_post">new text post</string>
+    <string name="new_image_post">new image post</string>
+
+    <!-- Create image post strings -->
+    <string name="create_image_post_imageview_descrption">new post image</string>
     <string name="create_post_image_comment_view_hint">Some comment about the image</string>
 
-    <!-- TODO: Create link post strings -->
+    <!-- Create link post strings -->
     <string name="create_link_post_title_hint">Your title</string>
     <string name="create_link_post_url_hint">Type in or paste URL</string>
     <string name="create_link_post_comment_hint">Some comment</string>
 
-    <!-- TODO: Create quote post strings -->
+    <!-- Create quote post strings -->
     <string name="create_quote_post_text_hint">Quote text</string>
     <string name="create_quote_post_source_hint">Quote source</string>
 
 
-    <!-- TODO: Create text post strings -->
+    <!-- Create text post strings -->
     <string name="create_text_post_title_hint">Your title</string>
     <string name="create_text_post_content_hint">Text here</string>
 
 
     <string name="email_placeholder">someauthor@email.com</string>
+
+
+    <!-- Create text post strings -->
+    <string name="post_image_description">post image</string>
+    <string name="post_image_text_description">post image description</string>
+    <string name="link_title_description">link title</string>
+    <string name="link_description_description">link description</string>
+    <string name="quote_text_description">quote text</string>
+    <string name="quote_source_description">quote description</string>
+    <string name="text_post_title_description">text post title</string>
+    <string name="text_post_content_description">text post source</string>
+
+    <string name="post_responses_description">post responses</string>
+
+    <string name="like_button_description">like button</string>
+    <string name="comment_button_description">comment button</string>
 
 </resources>

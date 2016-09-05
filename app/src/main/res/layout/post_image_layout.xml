@@ -10,6 +10,7 @@
         android:id="@+id/image_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/post_image_description"
         android:layout_marginTop="5dp"/>
 
     <TextView
@@ -19,6 +20,7 @@
         android:textSize="@dimen/item_font_size_small"
         android:layout_marginTop="5dp"
         fontPath="charter_regular.ttf"
+        android:contentDescription="@string/post_image_text_description"
         tools:text="" />
 
 </LinearLayout>

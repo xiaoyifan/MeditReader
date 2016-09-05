@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/create_post_image_view_descrption"
+        android:contentDescription="@string/create_image_post_imageview_descrption"
         android:visibility="visible" />
 
     <EditText

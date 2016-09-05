@@ -13,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
+        android:contentDescription="@string/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -49,6 +50,7 @@
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_green_oval"
                 android:src="@drawable/link"
+                android:contentDescription="@string/new_link_post"
                 android:tag="@string/linkTag"
                 />
 
@@ -56,6 +58,7 @@
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_white_oval"
                 android:src="@drawable/letter"
+                android:contentDescription="@string/new_text_post"
                 android:tag="@string/textTag"
                 />
 
@@ -63,6 +66,7 @@
                 style="@style/Item.Tumblr"
                 android:background="@drawable/tumblr_blue_oval"
                 android:src="@drawable/quote"
+                android:contentDescription="@string/new_quote_post"
                 android:tag="@string/quoteTag"
                 />
 
@@ -75,6 +79,7 @@
             android:layout_gravity="center"
             android:background="@drawable/tumblr_red_oval"
             android:src="@drawable/camera"
+            android:contentDescription="@string/new_image_post"
             />
 
     </com.uchicago.yifan.meditreader.Utitilies.ClipRevealFrame>
@@ -86,6 +91,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_image_edit"
+        android:contentDescription="@string/new_post_button"
         android:layout_margin="16dp"/>
 
 </RelativeLayout>

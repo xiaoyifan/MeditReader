@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
+            android:contentDescription="@string/email_field_description"
             android:orientation="horizontal">
 
             <ImageView
@@ -59,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:contentDescription="@string/password_field_description">
 
             <ImageView
                 android:id="@+id/password_photo"
@@ -91,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_user"
+            android:contentDescription="@string/new_user_checkbox"
             android:checked="true"
             android:gravity="center_vertical"
             app:v_styleId="@array/checkbox"/>
@@ -101,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:contentDescription="@string/login_button_description"
             app:v_styleId="@array/button_raise_wave"
             android:text="@string/sign_in"/>
 

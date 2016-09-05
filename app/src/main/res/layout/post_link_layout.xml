@@ -14,6 +14,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         fontPath="charter_bold.ttf"
+        android:contentDescription="@string/link_title_description"
         android:layout_marginTop="5dp"/>
 
     <TextView
@@ -24,6 +25,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="@dimen/item_font_size_small"
+        android:contentDescription="@string/link_description_description"
         fontPath="charter_regular.ttf" />
 
 </LinearLayout>

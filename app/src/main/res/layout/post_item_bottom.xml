@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
+            android:contentDescription="@string/like_button_description"
             tools:text="7" />
 
     </LinearLayout>
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-
+            android:contentDescription="@string/post_responses_description"
             tools:text="responses 7" />
 
         <ImageView
@@ -63,6 +64,7 @@
             android:layout_marginRight="5dp"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/comments_48"
+            android:contentDescription="@string/comment_button_description"
             android:layout_gravity="right" />
 
     </LinearLayout>
