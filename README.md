@@ -10,10 +10,14 @@ Backend is built based on Google Firebase.
 
 Screenshots from Nexus 6P is attached below:
 
-![Alt text](/home.png?raw=true "Home Screen")
 
-![Alt text](/menu.png?raw=true "Side Menu")
+![](/home.png)
+![](/menu.png)
 
-![Alt text](/new_post.png?raw=true "Creating new post")
+<!-- ![Alt text](/home.png?raw=true "Home Screen")
 
-![Alt text](/image_taking.png?raw=true "Take an image")
+![Alt text](/menu.png?raw=true "Side Menu") -->
+
+<!-- ![Alt text](/new_post.png?raw=true "Creating new post")
+
+![Alt text](/image_taking.png?raw=true "Take an image") -->
