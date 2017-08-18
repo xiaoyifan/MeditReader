@@ -14,6 +14,5 @@ Screenshots from Nexus 6P is attached below:
 ![](/home.png)
 ![](/menu.png)
 
-![Alt text](/new_post.png)
-
+![](/new_post.png)
 ![](/image_taking.png)
