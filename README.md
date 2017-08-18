@@ -14,10 +14,6 @@ Screenshots from Nexus 6P is attached below:
 ![](/home.png)
 ![](/menu.png)
 
-<!-- ![Alt text](/home.png?raw=true "Home Screen")
+![Alt text](/new_post.png)
 
-![Alt text](/menu.png?raw=true "Side Menu") -->
-
-<!-- ![Alt text](/new_post.png?raw=true "Creating new post")
-
-![Alt text](/image_taking.png?raw=true "Take an image") -->
+![](/image_taking.png)
